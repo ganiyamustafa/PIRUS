@@ -20,9 +20,6 @@ def ListRS(request):
     }
     return render(request, 'rumahsakit/index.html', context)
 
-def setVal(self, name, val):
-    name = val
-
 def SearchRS(request):
     if request.method == "GET":
         search_text = request.GET.get('q')
@@ -43,8 +40,6 @@ def SearchRS(request):
         context = {
             'RumahSakit': rumahsakit,
             'daerah' : daerah,
-            'Button' : '',
-            'setVal' : setVal,
         }
 
         if request.is_ajax():
