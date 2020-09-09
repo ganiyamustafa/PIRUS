@@ -1,0 +1,9 @@
+<ul id="search-result">
+    {% if RumahSakit %}
+        {% for RS in RumahSakit %}
+            <li>{{RS.nama}}</li>
+        {% endfor %}
+    {% else %}
+        <p>Data Not Found</p>
+    {% endif %}
+</ul>
