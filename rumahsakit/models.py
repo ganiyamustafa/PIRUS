@@ -12,7 +12,6 @@ class Poliklinik(models.Model):
 
 class Fasilitas(models.Model):
     fasilitas = models.CharField(max_length=50, unique=True, blank=False)
-    keterangan = models.TextField()
 
     def __str__(self):
         return self.fasilitas

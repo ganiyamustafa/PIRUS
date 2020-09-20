@@ -1,0 +1,78 @@
+body{
+    background-color: #eee;
+}
+
+div.scrollmenu::-webkit-scrollbar {
+    display: none;
+}
+
+div.scrollmenu {
+    padding: 10px 10px 10px 0;
+    overflow: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+
+div.scrollmenu a {
+    cursor: pointer;
+    border-radius: 100px;
+    background-color: #fff;
+    margin-right: 5px;
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 5px 20px 5px 20px;
+    text-decoration: none;
+}
+
+div.scrollmenu a:hover,  div.scrollmenu a:focus{
+    background-color: #2f71b3ff;
+    color: white;
+}
+
+.card-context{
+    padding: 5px 20px 5px 20px;
+    border-radius: 20px;
+}
+
+.btn-active{
+    background-color: #2f71b3ff !important;
+    color: white !important;
+}
+
+.bold{
+    font-weight: bolder;
+}
+
+.br-20{
+    border-radius: 20px;
+}
+
+.br-20-blr{
+    border-radius: 0px 0px 20px 20px !important;
+}
+
+.pointer{
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.pointer:focus, .pointer:hover{
+    background-color: black !important;
+}
+
+.pt-15{
+    padding-top: 15px;
+}
+
+.card-title img{
+    width: 100px;
+    height:100px;
+    border: 3px black solid;
+    box-shadow: -1px 2px 10px black;
+}
+
+.text-secondary{
+    color: rgb(112, 111, 111);
+}

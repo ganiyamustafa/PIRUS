@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        {% for rs in rumahsakit %}
+            <img src='/media/{{rs.image}}/' style="width: 100px; border: 10px black solid">
+        {% endfor %}
+        <ul id="poliklinik">
+            {% for poli in poliklinik %}
+                <li>{{poli.poliklinik}}</li>
+            {% endfor %}
+            <div id="showmore">show more</div>
+        </ul>
+        {{request.path}}
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        let x = 10
+        let size_li = $("#poliklinik li").length;
+
+        $(document).ready(function () {
+            $('#poliklinik li:lt('+size_li+')').hide();
+            $('#poliklinik li:lt('+x+')').show();
+
+            if(size_li <= x){
+                $('#showmore').hide()
+            }
+        })
+
+        function showmore(){
+            x= (x+5 <= size_li) ? size_li : x+5;
+            $('#poliklinik li:lt('+x+')').show();
+            $('#showmore').html('show less')
+        }
+
+        function showless(){
+            x=(x-5<0) ? x-5 : 10;
+            $('#poliklinik li').not(':lt('+x+')').hide();
+            $('#showmore').html('show more')
+        }
+
+        $('#showmore').on('click', function () {
+            if(x < size_li){
+                showmore()
+            }else{
+                showless()
+            }
+        })
+    </script>
+</html>

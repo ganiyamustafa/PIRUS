@@ -5,17 +5,19 @@
 {% endblock title %}
 
 {% block body %}
+    
+
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="text-right">
                 <input type="text" id="search" name="search" placeholder="search"><br>
             </div>
             <div>
                 <div class='scrollmenu' id='sp'>
-                <a value="" id="all" class="btn-active">All</a>
-                {% for daerah in daerah %}
-                    <a id="{{daerah.id}}">{{daerah.daerah}}</a>
+                <a value="" id="all" class="active">All</a>
+                {% for spesialis in spesialis %}
+                    <a id="{{spesialis.id}}">{{spesialis.spesialis}}</a>
                 {% endfor %}
             </div>
         <ol class="breadcrumb">
@@ -25,34 +27,27 @@
         
         <section class="content container-fluid">
 
-            <div id="replaceable-content" class="col-6">
-                {% include 'rumahsakit/rumahsakit-result-partial.html' %}
+            <div id="replaceable-content">
+                {% include 'dokter/dokter-result-partial.html' %}
             </div>
         </section>
     </div>
-
 {% endblock body %}
 
     {% comment %} Live Search {% endcomment %}
 {% block css %}
-    <style>
-        .active{
-            background: black;
-            color: white;
-        }
-    </style>
+    
 {% endblock css %}
 
-{% block javascript %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+{% block javascript %}
+    <script src='/static/js/navbar.js'></script>
     <script>
         const search = $('#search')
         const artists_div = $('#replaceable-content')
-        const endpoint = '/RumahSakit/'
+        const endpoint = '/dokter/'
         const delay_by_in_ms = 300
-        let daerah = ''
-        let page = 1
+        let spesialis = ''
         let scheduled_function = false
 
         let ajax_call = function (endpoint, request_parameters) {
@@ -67,31 +62,36 @@
 
         function send_request() {
             const request_parameters = {
-                q: $(search).val(),
-                f: $(daerah).attr('id'),
-                page: page
+                dokter: $(search).val(),
+                spesialis: $(spesialis).attr('id')
             }
 
             if (scheduled_function) {
                 clearTimeout(scheduled_function)
             }
 
+            
+
             scheduled_function = setTimeout(ajax_call, delay_by_in_ms, endpoint, request_parameters)
         }
 
+        $(document).ready(function() {
+            $('#sp').dragScroll({})
+        });
+
         $('#all').on('click', function () {
-            $(daerah).removeClass('btn-active')
-            daerah = ''
-            $(this).addClass('btn-active')
+            $(spesialis).removeClass('active')
+            spesialis = ''
+            $(this).addClass('active')
             send_request()
         })
 
-        {% for daerah in daerah %}
-            $('#{{daerah.id}}').on('click', function () {
-                $(daerah).removeClass('btn-active')
-                $('#all').removeClass('btn-active')
-                daerah = '#{{daerah.id}}'
-                $(this).addClass('btn-active')
+        {% for spesialis in spesialis %}
+            $('#{{spesialis.id}}').on('click', function () {
+                $(spesialis).removeClass('active')
+                $('#all').removeClass('active')
+                spesialis = '#{{spesialis.id}}'
+                $(this).addClass('active')
                 send_request()
             })
         {% endfor %}
@@ -103,4 +103,5 @@
 
     {% comment %} Live Search {% endcomment %}
 {% endblock javascript %}
+
 </html>

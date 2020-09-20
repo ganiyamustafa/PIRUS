@@ -1,9 +1,50 @@
-<ul id="search-result">
-    {% if RumahSakit %}
-        {% for RS in RumahSakit %}
-            <li>{{RS.nama}}</li>
-        {% endfor %}
-    {% else %}
-        <p>Data Not Found</p>
-    {% endif %}
-</ul>
+<div class="row">
+  {% if RumahSakit %}
+      {% for RS in RumahSakit %}
+        <div class="col-md-4">
+          <div class="card text-center br-20" style="background: white;">
+            <div class="card-body pt-15">
+              <h5 class="card-title"><img src='/media/{{RS.image}}' class="img-circle"></h5>
+              <h4 class="card-text bold">{{RS.nama}}</h4>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item text-secondary" style="font-size: 12px">{{RS.alamat}}</li>
+                <li class="list-group-item text-primary">{{RS.no_telp}}</li>
+                {% for daerah in daerah %}
+                  {% if daerah.id == RS.daerah %}
+                    <li class="list-group-item"><b class="bg-primary card-context">{{daerah.daerah}}</b></li>
+                  {% endif %}
+                {% endfor %}
+                <a href='{{RS.slug}}/'><li class="list-group-item bg-primary pointer br-20-blr">Lihat Rumah Sakit</li></a>
+              </ul>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+  {% else %}
+      <p>Data Not Found</p>
+  {% endif %}
+</div>
+
+{% if RumahSakit.has_other_pages %}
+  <div class="text-center">
+    <ul class="pagination">
+      {% if RumahSakit.has_previous %}
+        <li><a href="?page={{ RumahSakit.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in RumahSakit.paginator.page_range %}
+        {% if RumahSakit.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if RumahSakit.has_next %}
+        <li><a href="?page={{ RumahSakit.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+  </div>
+{% endif %}

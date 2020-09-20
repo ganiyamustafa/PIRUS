@@ -1,0 +1,9 @@
+<ul id="search-result">
+    {% if dokter %}
+        {% for dokter in dokter %}
+            <li><a href="{{dokter.slug}}/">{{dokter.Nama}}</a></li>
+        {% endfor %}
+    {% else %}
+        <p>Data Not Found</p>
+    {% endif %}
+</ul>
