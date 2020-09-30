@@ -5,7 +5,7 @@ from django.http import Http404
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
-from rumahsakit.models import RumahSakit, Daerah, Poliklinik
+from rumahsakit.models import RumahSakit, Daerah, Poliklinik, Fasilitas
 
 # def get_rs_data(daerah):
 #     rumahsakit = 
@@ -68,16 +68,23 @@ class searchRS(View):
 
 class selectRS(View):
     def get(self, request, *, rs_requested):
-        rumahsakit = RumahSakit.objects.values('id', 'image').filter(slug=rs_requested)[::1]
+        rumahsakit = RumahSakit.objects.values('id', 'image', 'nama', 'alamat', 'no_telp', 'deskripsi').filter(slug=rs_requested)[::1]
         poliklinikRS = RumahSakit.objects.values('id', 'poliklinik').filter(slug=rs_requested)[::1]
+        fasilitasRS = RumahSakit.objects.values('id', 'fasilitas').filter(slug=rs_requested)[::1]
         listpoliklinik = []
+        listfasilitas = []
 
         for poli in poliklinikRS:
             listpoliklinik.append(poli['poliklinik'])
 
+        for fasil in fasilitasRS:
+            listfasilitas.append(fasil['fasilitas'])
+
         poliklinik = Poliklinik.objects.all().filter(id__in=listpoliklinik)[::1]
+        fasilitas = Fasilitas.objects.all().filter(id__in=listfasilitas)[::1]
         context = {
             'rumahsakit': rumahsakit,
             'poliklinik': poliklinik,
+            'fasilitas' : fasilitas,
         }
         return render(request, 'rumahsakit/rsSelect.html', context)

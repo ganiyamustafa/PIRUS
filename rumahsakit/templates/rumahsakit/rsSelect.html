@@ -1,54 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        {% for rs in rumahsakit %}
-            <img src='/media/{{rs.image}}/' style="width: 100px; border: 10px black solid">
-        {% endfor %}
-        <ul id="poliklinik">
-            {% for poli in poliklinik %}
-                <li>{{poli.poliklinik}}</li>
-            {% endfor %}
-            <div id="showmore">show more</div>
-        </ul>
-        {{request.path}}
-    </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        let x = 10
-        let size_li = $("#poliklinik li").length;
+{% extends 'template_index.html' %}
 
-        $(document).ready(function () {
-            $('#poliklinik li:lt('+size_li+')').hide();
-            $('#poliklinik li:lt('+x+')').show();
+{% block title %}
+    Dokter
+{% endblock title %}
 
-            if(size_li <= x){
-                $('#showmore').hide()
-            }
-        })
+{% block body %}
 
-        function showmore(){
-            x= (x+5 <= size_li) ? size_li : x+5;
-            $('#poliklinik li:lt('+x+')').show();
-            $('#showmore').html('show less')
-        }
+        <div class="content-wrapper" style="margin-bottom: 20px">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="content-body">
+                    {% for rs in rumahsakit %}
+                        <img src='/media/{{rs.image}}/'>
+                        <div class="pr-20">
+                            <h3 class="title">{{rs.nama}}</h3>
+                            <p class=" pl-20"><a class="text-primary">{{rs.alamat}}</a></p>
+                            <p class="text-primary pl-20">{{rs.no_telp}}</p>
+                            <p class="pl-20">{{rs.deskripsi}}</p>
+                        </div>
+                    {% endfor %}
+                    <div class="row pr-20">
+                        <div class="col-md-6 pr-20">
+                            <h4 class='pl-20 bold'>Poliklinik</h4>
+                            <ul id="poliklinik" class="pl-20 list-style-none">
+                                {% for poli in poliklinik %}
+                                    <li class="list-group-line tooltips">
+                                        {{poli.poliklinik}}
+                                        <div class="tooltiptext">
+                                            <p class="tooltiptext-title"><i class="fa fa-question-circle"></i> {{poli.poliklinik}}</p>
+                                            <div class="tooltiptext-description">
+                                                {{poli.keterangan}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <a href="#poliklinik" id="showmore" class="text-primary pl-20">show more</a>
+                        </div>
+                        <div class="col-md-6 pr-20">
+                            <h4 class='pl-20 bold'>Fasilitas</h4>
+                            <ul id="fasilitas" class="pl-20 list-style-none">
+                                {% for fasil in fasilitas %}
+                                    <li class="list-group-line">{{fasil.fasilitas}}</li>
+                                {% endfor %}
+                            </ul>
+                            <a href="#fasilitas" id="show_more" class="text-primary pl-20">show more</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
-        function showless(){
-            x=(x-5<0) ? x-5 : 10;
-            $('#poliklinik li').not(':lt('+x+')').hide();
-            $('#showmore').html('show more')
-        }
+    {% endblock body %}
 
-        $('#showmore').on('click', function () {
-            if(x < size_li){
-                showmore()
-            }else{
-                showless()
-            }
-        })
-    </script>
+    {% block javascript %}
+        <script src='/static/js/showmore.js'></script>
+    {% endblock javascript %}
 </html>

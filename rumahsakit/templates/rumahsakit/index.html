@@ -8,8 +8,8 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <div class="text-right">
-                <input type="text" id="search" name="search" placeholder="search"><br>
+            <div>
+                <input type="text" id="search" name="search" placeholder="search" class="search-box"><br>
             </div>
             <div>
                 <div class='scrollmenu' id='sp'>
@@ -50,7 +50,7 @@
         const search = $('#search')
         const artists_div = $('#replaceable-content')
         const endpoint = '/RumahSakit/'
-        const delay_by_in_ms = 300
+        const delay_by_in_ms = 50
         let daerah = ''
         let page = 1
         let scheduled_function = false
