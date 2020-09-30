@@ -11,7 +11,7 @@
   <h3 align="center">PIRUS</h3>
 
   <p align="center">
-    PIRUS PIRUS YAHAHAHA OK LANJUTTTT
+    PIRUS is a Website that displays data on hospitals in Bandung and Cimahi.
     <br />
     <a href="https://github.com/GaniyaMustafa/PIRUS"><strong>Explore the docs »</strong></a>
     <br />
@@ -116,7 +116,7 @@ To access the admin site visit the /admin url<br>
 You will need your "Username" & "Password" from [step 5](#installation) as a login authentication
 
 ## Our Team
-* **Front-end team**: Pebi Ok Lanjut Hok hokk
+* **Front-end team**: Feby
 * **Back-end team**: [Ganiya Mustafa](https://github.com/GaniyaMustafa)
 
 ## Contributing
