@@ -1,0 +1,163 @@
+/* line 7, static/sass/PIRUS.sass */
+body {
+  background-color: #eee; }
+
+/* line 10, static/sass/PIRUS.sass */
+html {
+  scroll-behavior: smooth; }
+
+/* line 14, static/sass/PIRUS.sass */
+div.scrollmenu {
+  padding: 10px 10px 10px 0;
+  overflow: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none; }
+  /* line 20, static/sass/PIRUS.sass */
+  div.scrollmenu a {
+    cursor: pointer;
+    border-radius: 100px;
+    background-color: #fff;
+    margin-right: 5px;
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 5px 20px 5px 20px;
+    text-decoration: none; }
+    /* line 30, static/sass/PIRUS.sass */
+    div.scrollmenu a:hover, div.scrollmenu a:focus {
+      background-color: #2f71b3ff;
+      color: white !important; }
+
+/* line 33, static/sass/PIRUS.sass */
+div::-webkit-scrollbar {
+  display: none; }
+
+/* line 36, static/sass/PIRUS.sass */
+.content-body {
+  background-color: white;
+  border-radius: 25px; }
+  /* line 39, static/sass/PIRUS.sass */
+  .content-body img {
+    width: 100%;
+    height: 300px;
+    border-radius: 25px;
+    object-fit: cover; }
+
+/* line 45, static/sass/PIRUS.sass */
+.search-box {
+  width: 100%;
+  border-radius: 50px;
+  border: 0px;
+  padding-left: 10px; }
+
+/* line 51, static/sass/PIRUS.sass */
+ul.list-style-none {
+  list-style-type: none; }
+  /* line 53, static/sass/PIRUS.sass */
+  ul.list-style-none li.list-group-line {
+    border-bottom: 1px solid #2f71b3ff;
+    padding-bottom: 5px;
+    margin-bottom: 5px; }
+
+/* line 58, static/sass/PIRUS.sass */
+.card-context {
+  padding: 5px 20px 5px 20px;
+  border-radius: 20px; }
+
+/* line 62, static/sass/PIRUS.sass */
+.btn-active {
+  background-color: #2f71b3ff !important;
+  color: white !important; }
+
+/* line 66, static/sass/PIRUS.sass */
+.bold {
+  font-weight: bolder; }
+
+/* line 69, static/sass/PIRUS.sass */
+.br-20 {
+  border-radius: 20px; }
+
+/* line 72, static/sass/PIRUS.sass */
+.br-20-blr {
+  border-radius: 0px 0px 20px 20px !important; }
+
+/* line 75, static/sass/PIRUS.sass */
+a:hover {
+  color: black !important; }
+
+/* line 78, static/sass/PIRUS.sass */
+.pointer {
+  cursor: pointer;
+  transition: 0.5s; }
+  /* line 81, static/sass/PIRUS.sass */
+  .pointer:focus, .pointer:hover {
+    background-color: black !important; }
+
+/* line 84, static/sass/PIRUS.sass */
+.pt-15 {
+  padding-top: 15px; }
+
+/* line 88, static/sass/PIRUS.sass */
+.card-title img {
+  width: 100px;
+  height: 100px;
+  border: 3px black solid;
+  box-shadow: -1px 2px 10px black; }
+
+/* line 94, static/sass/PIRUS.sass */
+.text-secondary {
+  color: #706f6f; }
+
+/* line 97, static/sass/PIRUS.sass */
+.pl-20 {
+  padding-left: 20px; }
+
+/* line 100, static/sass/PIRUS.sass */
+.pr-20 {
+  padding-right: 20px; }
+
+/* line 103, static/sass/PIRUS.sass */
+.title {
+  font-weight: bolder;
+  padding-left: 20px; }
+
+/* line 107, static/sass/PIRUS.sass */
+.tooltips {
+  position: relative;
+  border-bottom: 1px dotted black; }
+  /* line 110, static/sass/PIRUS.sass */
+  .tooltips .tooltiptext {
+    display: none;
+    width: 350px;
+    background-color: #2f71b3ff;
+    color: white;
+    text-align: center;
+    padding: 5px 10px 5px 10px;
+    border-radius: 6px;
+    bottom: 110%;
+    left: 50%;
+    margin-left: -175px;
+    position: absolute;
+    z-index: 1; }
+    /* line 124, static/sass/PIRUS.sass */
+    .tooltips .tooltiptext .tooltiptext-title {
+      border-bottom: 1px solid white;
+      padding-bottom: 5px;
+      margin-bottom: 5px; }
+    /* line 129, static/sass/PIRUS.sass */
+    .tooltips .tooltiptext .tooltiptext-description {
+      padding: 10px;
+      background-color: white;
+      color: black;
+      margin-bottom: 5px; }
+    /* line 135, static/sass/PIRUS.sass */
+    .tooltips .tooltiptext i {
+      position: absolute;
+      top: 8px;
+      left: 10px; }
+  /* line 140, static/sass/PIRUS.sass */
+  .tooltips:hover .tooltiptext {
+    display: inline-block; }
+
+/* Show the tooltip text when you mouse over the tooltip container */

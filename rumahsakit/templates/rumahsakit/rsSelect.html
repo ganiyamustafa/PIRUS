@@ -1,7 +1,7 @@
 {% extends 'template_index.html' %}
 
 {% block title %}
-    Dokter
+    Rumah Sakit
 {% endblock title %}
 
 {% block body %}
@@ -9,7 +9,11 @@
         <div class="content-wrapper" style="margin-bottom: 20px">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <div class="content-body">
+                <div class='scrollmenu' id='sp'>
+                    <a href="/RumahSakit/{{rs_requested}}/" id="btn-rs" class="btn-active">Rumah Sakit</a>
+                    <a href="/RumahSakit/dokter/{{rs_requested}}/" id="btn-dokter">Dokter</a>
+                </div>
+                <div class="content-body" id="content-body">
                     {% for rs in rumahsakit %}
                         <img src='/media/{{rs.image}}/'>
                         <div class="pr-20">

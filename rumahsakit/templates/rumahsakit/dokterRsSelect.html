@@ -1,0 +1,89 @@
+{% extends 'template_index.html' %}
+
+{% block title %}
+    Rumah Sakit
+{% endblock title %}
+
+{% block body %}
+
+        <div class="content-wrapper" style="margin-bottom: 20px">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class='scrollmenu' id='sp'>
+                    <a href="/RumahSakit/{{rs_requested}}/" id="btn-rs">Rumah Sakit</a>
+                    <a href="/RumahSakit/dokter/{{rs_requeste}}/" id="btn-dokter" class="btn-active">Dokter</a>
+                </div>
+                
+                <div class="content container-fluid" id="content-body">
+                    <div class="row">
+                        <div>
+                            <div class='scrollmenu' id='spe'>
+                            <a value="" id="all" class="active">All</a>
+                            {% for spesialis in spesialis %}
+                                <a id="{{spesialis.id}}">{{spesialis.spesialis}}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div id="replaceable-content">
+                            {% include 'dokter/dokter-result-partial.html' %}
+                        </div>
+                </div>
+            </section>
+        </div>
+    {% endblock body %}
+
+    {% block javascript %}
+        <script>
+            const artists_div = $('#replaceable-content')
+            const endpoint = '{{request.path}}'
+            const delay_by_in_ms = 300
+            let spesialis = ''
+            let scheduled_function = false
+
+            let ajax_call = function (endpoint, request_parameters) {
+                $.getJSON(endpoint, request_parameters)
+                    .done(response => {
+                        artists_div.fadeTo('fast', 0).promise().then(() => {
+                            artists_div.html(response['html_from_view'])
+                            artists_div.fadeTo('fast', 1)
+                        })
+                    })
+            }
+
+            function send_request() {
+                const request_parameters = {
+                    spesialis: $(spesialis).attr('id')
+                }
+
+                if (scheduled_function) {
+                    clearTimeout(scheduled_function)
+                }
+
+                
+
+                scheduled_function = setTimeout(ajax_call, delay_by_in_ms, endpoint, request_parameters)
+            }
+
+            $(document).ready(function() {
+                $('#spe').dragScroll({})
+            });
+
+            $('#all').on('click', function () {
+                $(spesialis).removeClass('active')
+                spesialis = ''
+                $(this).addClass('active')
+                send_request()
+            })
+
+            {% for spesialis in spesialis %}
+                $('#{{spesialis.id}}').on('click', function () {
+                    $(spesialis).removeClass('active')
+                    $('#all').removeClass('active')
+                    spesialis = '#{{spesialis.id}}'
+                    $(this).addClass('active')
+                    send_request()
+                })
+            {% endfor %}
+        </script>
+    {% endblock javascript %}
+</html>

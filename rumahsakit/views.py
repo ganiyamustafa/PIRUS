@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
 from rumahsakit.models import RumahSakit, Daerah, Poliklinik, Fasilitas
+from dokter.models import Spesialis, Doctor
 
 # def get_rs_data(daerah):
 #     rumahsakit = 
@@ -68,23 +69,48 @@ class searchRS(View):
 
 class selectRS(View):
     def get(self, request, *, rs_requested):
-        rumahsakit = RumahSakit.objects.values('id', 'image', 'nama', 'alamat', 'no_telp', 'deskripsi').filter(slug=rs_requested)[::1]
-        poliklinikRS = RumahSakit.objects.values('id', 'poliklinik').filter(slug=rs_requested)[::1]
-        fasilitasRS = RumahSakit.objects.values('id', 'fasilitas').filter(slug=rs_requested)[::1]
-        listpoliklinik = []
-        listfasilitas = []
+        url_request = str(rs_requested).split('/')
+        if url_request[0] != 'dokter':
+            rumahsakit = RumahSakit.objects.values('id', 'image', 'nama', 'alamat', 'no_telp', 'deskripsi').filter(slug=rs_requested)[::1]
+            poliklinikRS = RumahSakit.objects.values('id', 'poliklinik').filter(slug=rs_requested)[::1]
+            fasilitasRS = RumahSakit.objects.values('id', 'fasilitas').filter(slug=rs_requested)[::1]
+            listpoliklinik = []
+            listfasilitas = []
+            url = request.path.split('/')[1]
+            rs_request = url_request[0]
 
-        for poli in poliklinikRS:
-            listpoliklinik.append(poli['poliklinik'])
+            for poli in poliklinikRS:
+                listpoliklinik.append(poli['poliklinik'])
 
-        for fasil in fasilitasRS:
-            listfasilitas.append(fasil['fasilitas'])
+            for fasil in fasilitasRS:
+                listfasilitas.append(fasil['fasilitas'])
 
-        poliklinik = Poliklinik.objects.all().filter(id__in=listpoliklinik)[::1]
-        fasilitas = Fasilitas.objects.all().filter(id__in=listfasilitas)[::1]
-        context = {
-            'rumahsakit': rumahsakit,
-            'poliklinik': poliklinik,
-            'fasilitas' : fasilitas,
-        }
-        return render(request, 'rumahsakit/rsSelect.html', context)
+            poliklinik = Poliklinik.objects.all().filter(id__in=listpoliklinik)[::1]
+            fasilitas = Fasilitas.objects.all().filter(id__in=listfasilitas)[::1]
+            context = {
+                'rumahsakit': rumahsakit,
+                'poliklinik': poliklinik,
+                'fasilitas' : fasilitas,
+                'url' : url,
+                'rs_requested' : rs_request,
+            }
+
+            return render(request, 'rumahsakit/rsSelect.html', context)
+        elif url_request[0] == 'dokter':
+            rs_request = url_request[1]
+            # rumahsakit = RumahSakit.objects.values('id').filter(slug=rs_request)[::1]
+            # spesialis_dokters = Doctor.objects.values('id', 'spesialis').filter(rumahsakit=rumahsakit[0]['id'])[::1]
+            # spesialis_list = []
+            
+            # for spesialis_dokter in spesialis_dokters:
+            #     spesialis_list.append(spesialis_dokter['spesialis'])
+
+            spesialis = Spesialis.objects.all().order_by('spesialis')[::1]
+
+            context = {
+                'spesialis': spesialis,
+                'rs_requested' : rs_request,
+            }
+
+            return render(request, 'rumahsakit/dokterRsSelect.html', context)
+
