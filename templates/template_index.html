@@ -19,10 +19,11 @@
         {% endblock head %}
     </head>
     <body class="hold-transition skin-black-light sidebar-mini">
+    <div id="loader"></div>
     <header class="main-header"">
 
             <!-- Logo -->
-            <a href="index2.html" class="logo" style="background-color: #2f71b3ff;border-radius: 0 20px 20px 0;color: white">
+            <a href="/" class="logo" style="background-color: #2f71b3ff;border-radius: 0 20px 20px 0;color: white">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>P</b>RS</span>
             <!-- logo for regular state and mobile devices -->
@@ -78,41 +79,45 @@
                     <!-- The user image in the navbar-->
                     <img src="/media/img/RS/hospital_al_islam.jpg" class="user-image" alt="User Image">
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                    <span class="hidden-xs">Alexander Pierce</span>
+                    <span class="hidden-xs">
+                        {% if user.is_authenticated %}
+                            {{user.username|title}}
+                        {% else %}
+                            Guest
+                        {% endif %}
+                    </span>
                     </a>
                     <ul class="dropdown-menu">
                     <!-- The user image in the menu -->
                     <li class="user-header">
                         <img src="/media/img/RS/hospital_al_islam.jpg" class="img-circle" alt="User Image">
-
-                        <p>
-                        Alexander Pierce - Web Developer
-                        <small>Member since Nov. 2012</small>
-                        </p>
+                        {% if user.is_authenticated %}
+                            <p>
+                            {{user.username|title}}
+                            <small>Member since {{user.date_joined|date:'d M yy'}}</small>
+                            </p>
+                        {% else %}
+                            <p>
+                            Guest
+                            <small>You not logged in</small>
+                            </p>
+                        {% endif %}
                     </li>
                     <!-- Menu Body -->
-                    <li class="user-body">
-                        <div class="row">
-                        <div class="col-xs-4 text-center">
-                            <a href="#">Followers</a>
-                        </div>
-                        <div class="col-xs-4 text-center">
-                            <a href="#">Sales</a>
-                        </div>
-                        <div class="col-xs-4 text-center">
-                            <a href="#">Friends</a>
-                        </div>
-                        </div>
-                        <!-- /.row -->
-                    </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">
-                        <div class="pull-left">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                        </div>
-                        <div class="pull-right">
-                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                        </div>
+                        {% if user.is_authenticated %}
+                            <div class="pull-left">
+                            <a href="#" class="btn btn-default btn-flat animated-btn-light animated-btn-3">Profile</a>
+                            </div>
+                            <div class="pull-right">
+                            <a href="/logout/" class="btn btn-default btn-flat animated-btn-light animated-btn-3">Sign out</a>
+                            </div>
+                        {% else %}
+                            <div class="text-center">
+                            <a href="/login/" class="btn btn-default btn-flat animated-btn-light animated-btn-3-lg">Sign in</a>
+                            </div>
+                        {% endif %}
                     </li>
                     </ul>
                 </li>
@@ -131,7 +136,7 @@
                 <!-- Optionally, you can add icons to the links -->
                 <li class="{% if request.path == '/RumahSakit/'%} active {% endif %}"><a href="/RumahSakit/"><i class="fa fa-link"></i> <span>Rumah Sakit</span></a></li>
                 <li class="{% if request.path == '/dokter/'%} active {% endif %}"><a href="/dokter/"><i class="fa fa-link"></i> <span>Dokter</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>About</span></a></li>
+                <li class="{% if request.path == '/about/'%} active {% endif %}"><a href="/about/"><i class="fa fa-link"></i> <span>About</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
             </section>
@@ -147,6 +152,17 @@
     <script src="/static/js/jquery.dragscroll.js"></script>
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/adminlte.min.js"></script>    
+    <script>
+        document.onreadystatechange = function(){
+            if(document.readyState !== 'complete'){
+                document.querySelector('body').style.visibility = 'hidden';
+                document.querySelector('#loader').style.visibility = 'visible';
+            }else{
+                document.querySelector('body').style.visibility = 'visible';
+                document.querySelector('#loader').style.display = 'none';
+            }
+        }
+    </script>
 
     {% block javascript %} {% endblock javascript %}
 </html>

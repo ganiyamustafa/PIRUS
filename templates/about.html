@@ -1,0 +1,63 @@
+{% extends 'template_index.html' %}
+
+{% block title %}
+    Dokter
+{% endblock title %}
+
+{% block body %}
+
+        <div class="content-wrapper" style="margin-bottom: 20px">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class='scrollmenu' id='sp'>
+                    <a href="#" class="btn-active">Dokter</a>
+                </div>
+                <div class="content-body" id="content-body">
+                    <div class="row text-center">
+                        <div class="col-md-6">
+                            <h4 class="bold">Developer</h4>
+                            {% for about in abouts %}
+                                <img src="/static/{{about.image}}" alt="image" class="profile mt-10" style="object-fit: cover;">
+                                <ul class="pt-15 list-style-none pr-40">
+                                    <li class="list-group-line">
+                                        <h4 class="bold">Nama</h4>
+                                        {{about.nama}}
+                                    </li>
+                                    <li class="list-group-line">
+                                        <h4 class="bold">Pendidikan</h4>
+                                        {{about.pendidikan}}
+                                    </li>
+                                    <li class="list-group-line">
+                                        <h4 class="bold">Tentang Saya</h4>
+                                        {{about.deskripsi}}
+                                    </li>
+                                    <li class="list-group-line">
+                                        <h4 class="bold">Social</h4>
+                                        <div class="row">
+                                        {% for icon, link in about.social %}
+                                            <div class="col-md-4" style="margin: 0;padding: 0;">
+                                                <a href="{{link}}" class="animated-btn animated-btn-3" target="_blank">
+                                                    <img src="/static/img/{{icon}}" class="icon">
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="bold">About Website</h4>
+                            PIRUS merupakan sebuah website yang menampilkan informasi dari rumah sakit yang ada di Bandung dan Cimahi. Website ini dibuat dengan tujuan untuk memenuhi tugas project work di SMKN 1 Cimahi.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    {% endblock body %}
+
+    {% block javascript %}
+        <script src='/static/js/showmore.js'></script>
+    {% endblock javascript %}
+</html>

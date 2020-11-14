@@ -10,6 +10,15 @@ body
 html 
   scroll-behavior: smooth;
 
+#loader
+  background: url('../anim/oie_trans.gif') no-repeat center center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999999;
+
 div
   &.scrollmenu
     padding: $padding $padding $padding 0;
@@ -32,6 +41,135 @@ div
         color: white !important;
   &::-webkit-scrollbar 
     display: none;
+  &.box
+    position: relative;
+    display: inline-block;
+    background: $color-primary;
+    color: white;
+    img
+      &.banner
+        opacity: 0.6;
+    .text
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+
+//colors
+$white: #fff;
+
+@mixin animated-btn($color, $color-hover, $background, $background-before)
+  position: relative;
+  display: block;
+  color: $color !important;
+  font-size: 14px;
+  text-decoration: none;
+  background: $background !important;
+  z-index: 999;
+  overflow: hidden;
+  transition: 1s all ease;
+  
+  img
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 50px !important;
+    height: 50px !important;
+
+  &:hover
+    background: transparent;
+    color: $color-hover !important;
+
+  &:before
+    background: $background-before;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: -1;
+    transition: all 0.6s ease;
+
+@mixin animated-btn-3($height)
+  &:before
+    width: 100%;
+    height: 0%;
+    transform: translate(-50%,-50%) rotate(45deg);
+
+  &:hover:before
+    height: $height;
+  
+
+.animated-btn
+  @include animated-btn(white, black, $color-primary, white)
+
+.animated-btn-light
+  @include animated-btn(black, white, white, $color-primary)
+
+.animated-btn-3
+  @include animated-btn-3(300%)
+
+.animated-btn-3-lg
+  @include animated-btn-3(600%)
+
+//default button
+.btn
+  color: #fff;
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  transition: 0.35s ease-in-out;
+  // display: block;
+  font-size: 16px;
+  position: relative;
+  text-decoration: none;
+  width: 100%; 
+ 
+  &:hover  
+    text-decoration: none;
+
+/////////////////////////////////
+//button one
+///////////////////////////////
+.btn-1
+  background: darken($color-primary, 1.5%);
+  
+  svg
+    left: 0;
+    position: absolute;
+    top: 0; 
+    border-radius: 0px 0px $border-radius - 5px $border-radius - 5px !important;
+    width: 100%; 
+    height: 100%;
+  
+  rect
+    fill: none;
+    stroke: $color-primary;
+    stroke-width: 2;
+    stroke-dasharray: 422, 0;
+    transition: all 0.35s linear;
+
+  &:hover
+    background: rgba($color-primary, 0);
+    font-weight: 900;
+    
+    rect
+      stroke-width: 5;
+      stroke-dasharray: 15, 310;
+      stroke-dashoffset: 48;
+      transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+
+.box-shadow
+  box-shadow: -2px 3px 13px black;
+
+.box-shadow-hover
+  transition: 0.2s;
+  &:hover
+    box-shadow: -2px 3px 13px black;
+
+.scroll-div-horizontal
+  overflow-y: auto;
 
 .content-body
   background-color: white;
@@ -41,6 +179,9 @@ div
     height: 300px;
     border-radius: $border-radius;
     object-fit: cover;
+    &.profile
+      width: 55%;
+      height: 200px;
 
 .search-box
     width: 100%;
@@ -54,6 +195,13 @@ ul.list-style-none
     border-bottom: 1px solid $color-primary;
     padding-bottom: (1/2)*$padding;
     margin-bottom: (1/2)*$margin;
+
+img
+  &.object-fit
+    object-fit: cover;
+  &.icon
+    width: 50px;
+    height: 50px;
 
 .card-context
     padding: (1/2)*$padding 2*$padding (1/2)*$padding 2*$padding;
@@ -69,11 +217,18 @@ ul.list-style-none
 .br-20
     border-radius: $border-radius - 5px;
 
+.br-25
+  border-radius: $border-radius;
+
 .br-20-blr
     border-radius: 0px 0px $border-radius - 5px $border-radius - 5px !important;
 
-a:hover
+a
+  &:hover
     color: black !important;
+  &.style-none
+    color: black;
+    text-decoration: none;
 
 .pointer
   cursor: pointer;
@@ -81,24 +236,37 @@ a:hover
   &:focus, &:hover
     background-color: black !important;
 
-.pt-15
-    padding-top: $padding + 5px;
-
 .card-title 
   img
     width: 100px;
     height: 100px;
     border: 3px black solid;
     box-shadow: -1px 2px 10px black;
+    &.none
+      border: 0;
+      box-shadow: 0px 0px 0px black !important;
 
 .text-secondary
-    color: rgb(112, 111, 111);
+  color: rgb(112, 111, 111);
 
-.pl-20
-    padding-left: 2*$padding;
-
-.pr-20
-    padding-right: 2*$padding;
+@for $i from 1 through 100
+  @if $i % 10 == 0 or $i % 5 == 0
+    .pb-#{$i}
+      padding-bottom: #{$i}px;
+    .pt-#{$i}
+      padding-top: #{$i}px;
+    .pl-#{$i}
+      padding-left: #{$i}px;
+    .pr-#{$i}
+      padding-right: #{$i}px;
+    .mt-#{$i}
+      margin-top: #{$i}px;
+    .mb-#{$i}
+      margin-bottom: #{$i}px;
+    .mr-#{$i}
+      margin-right: #{$i}px;
+    .ml-#{$i}
+      margin-left: #{$i}px;
 
 .title
     font-weight: bolder;

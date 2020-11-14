@@ -60,8 +60,8 @@ class CustomUser(AbstractBaseUser):
             self.is_staff = True
             self.is_superuser = True
         elif self.role == 'D':
-            self.is_admin = False
-            self.is_staff = False
+            self.is_admin = True
+            self.is_staff = True
             self.is_superuser = False
         super(CustomUser, self).save(*args, **kwargs)
 

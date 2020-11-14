@@ -1,0 +1,80 @@
+{% extends 'template_index.html' %}
+
+{% block title %}
+    Dokter
+{% endblock title %}
+
+{% block body %}
+
+        <div class="content-wrapper" style="margin-bottom: 20px">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class='scrollmenu' id='sp'>
+                    <a href="#" class="btn-active">Dokter</a>
+                </div>
+                <div class="content-body" id="content-body">
+                    <div class="row text-center">
+                        <div class="col-md-6">
+                            {% for dokter in dokters %}
+                                <img src="/media/{{dokter.image}}" alt="image" class="profile mt-10">
+                                <ul class="pt-15 list-style-none pr-40">
+                                    <li class="list-group-line">
+                                        <h4 class="bold">Nama</h4>
+                                        {{dokter.Nama}}
+                                    </li>
+                                    <li class="list-group-line">
+                                        <h4 class="bold">Pendidikan</h4>
+                                        {{dokter.pendidikan}}
+                                    </li>
+                                    <li class="list-group-line">
+                                        <h4 class="bold">Pengalaman</h4>
+                                        {{dokter.pengalaman}} Tahun
+                                    </li>
+                                    <li class="list-group-line">
+                                        <h4 class="bold">Spesialis</h4>
+                                        {% for spesialis in spesialiss %}
+                                            <div class="bg-primary mt-10 br-20">{{spesialis.spesialis}}</div>
+                                        {% endfor %}
+                                    </li>
+                                </ul>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 scroll-div-horizontal" style="height:625px">
+                            <h4 class="bold">Rumah Sakit</h4>
+                            {% for rumahsakit in rumahsakits %}
+                                <div class="card text-center br-20 box-shadow mr-15 ml-15" style="background: white;">
+                                    <div class="card-body pt-15">
+                                    <h5 class="card-title"><img src='/media/{{rumahsakit.image}}' class="img-circle"></h5>
+                                    <h4 class="card-text bold">{{rumahsakit.nama}}</h4>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item text-secondary" style="font-size: 12px">{{rumahsakit.alamat}}</li>
+                                        <li class="list-group-item text-primary">{{rumahsakit.no_telp}}</li>
+                                        {% for daerah in daerahs %}
+                                            {% if daerah.id == rumahsakit.daerah %}
+                                                <li class="list-group-item"><b class="bg-primary card-context">{{daerah.daerah}}</b></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <a href='/RumahSakit/{{rumahsakit.slug}}/'>
+                                            <li class="list-group-item btn btn-1 br-20-blr">
+                                                <svg>
+                                                  <rect x="0" y="0" fill="none" width="100%" height="100%"/>
+                                                </svg>
+                                                Lihat Rumah Sakit
+                                            </li>
+                                        </a>
+                                    </ul>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    {% endblock body %}
+
+    {% block javascript %}
+        <script src='/static/js/showmore.js'></script>
+    {% endblock javascript %}
+</html>

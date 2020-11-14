@@ -68,6 +68,22 @@ class searchRS(View):
         return redirect('RumahSakit')
 
 class selectRS(View):
+    def filter_dokter(self, request, rs_requst):
+        search_text = request.GET.get('dokter')
+        spesialis_filter = request.GET.get('spesialis')
+        if search_text:
+            if spesialis_filter:
+                dokter = Doctor.objects.values('id', 'Nama', 'image', 'pendidikan', 'pengalaman', 'slug').filter(Nama__contains=search_text, spesialis=spesialis_filter, rumahsakit=rs_requst).order_by('Nama')[::1]
+            else:
+                dokter = Doctor.objects.values('id', 'Nama', 'image', 'pendidikan', 'pengalaman', 'slug').filter(Nama__contains=search_text, rumahsakit=rs_requst).order_by('Nama')[::1]
+        else:
+            if spesialis_filter:
+                dokter = Doctor.objects.values('id', 'Nama', 'image', 'pendidikan', 'pengalaman', 'slug').filter(spesialis=spesialis_filter, rumahsakit=rs_requst).order_by('Nama')[::1]
+            else:
+                dokter = Doctor.objects.values('id', 'Nama', 'image', 'pendidikan', 'pengalaman', 'slug').filter(rumahsakit=rs_requst).order_by('Nama')[::1]
+        
+        return dokter
+
     def get(self, request, *, rs_requested):
         url_request = str(rs_requested).split('/')
         if url_request[0] != 'dokter':
@@ -98,19 +114,34 @@ class selectRS(View):
             return render(request, 'rumahsakit/rsSelect.html', context)
         elif url_request[0] == 'dokter':
             rs_request = url_request[1]
-            # rumahsakit = RumahSakit.objects.values('id').filter(slug=rs_request)[::1]
-            # spesialis_dokters = Doctor.objects.values('id', 'spesialis').filter(rumahsakit=rumahsakit[0]['id'])[::1]
-            # spesialis_list = []
+            rumahsakit = RumahSakit.objects.values('id').filter(slug=rs_request)[::1]
+            spesialis_dokters = Doctor.objects.values('id', 'spesialis').filter(rumahsakit=rumahsakit[0]['id'])[::1]
+            dokter = self.filter_dokter(request, rumahsakit[0]['id'])
+            spesialis_list = []
             
-            # for spesialis_dokter in spesialis_dokters:
-            #     spesialis_list.append(spesialis_dokter['spesialis'])
+            for spesialis_dokter in spesialis_dokters:
+                spesialis_list.append(spesialis_dokter['spesialis'])
 
-            spesialis = Spesialis.objects.all().order_by('spesialis')[::1]
+            dokter = self.filter_dokter(request, rumahsakit[0]['id'])
+
+            spesialis = Spesialis.objects.all().filter(id__in=spesialis_list).order_by('spesialis')[::1]
 
             context = {
+                'dokter': paginate_RS(dokter, request),
                 'spesialis': spesialis,
                 'rs_requested' : rs_request,
+                'spesialis_dokter': spesialis_dokters,
             }
+
+            if request.is_ajax():
+                html = render_to_string(
+                    template_name="dokter/dokter-result-partial.html", 
+                    context = context
+                )
+
+                data_dict = {"html_from_view": html}
+
+                return JsonResponse(data=data_dict, safe=False)
 
             return render(request, 'rumahsakit/dokterRsSelect.html', context)
 

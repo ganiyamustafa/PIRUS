@@ -15,7 +15,7 @@
             </div>
             <div>
                 <div class='scrollmenu' id='sp'>
-                <a value="" id="all" class="active">All</a>
+                <a value="" id="all" class="btn-active">All</a>
                 {% for spesialis in spesialis %}
                     <a id="{{spesialis.id}}">{{spesialis.spesialis}}</a>
                 {% endfor %}
@@ -80,18 +80,18 @@
         });
 
         $('#all').on('click', function () {
-            $(spesialis).removeClass('active')
+            $(spesialis).removeClass('btn-active')
             spesialis = ''
-            $(this).addClass('active')
+            $(this).addClass('btn-active')
             send_request()
         })
 
         {% for spesialis in spesialis %}
             $('#{{spesialis.id}}').on('click', function () {
-                $(spesialis).removeClass('active')
-                $('#all').removeClass('active')
+                $(spesialis).removeClass('btn-active')
+                $('#all').removeClass('btn-active')
                 spesialis = '#{{spesialis.id}}'
-                $(this).addClass('active')
+                $(this).addClass('btn-active')
                 send_request()
             })
         {% endfor %}

@@ -8,8 +8,9 @@ class DoctorAdmin(admin.ModelAdmin):
         ('Spesialis', {'fields': ('spesialis',)}),
         ('Rumah Sakit', {'fields': ('rumahsakit',)}),
     )
-    ordering = ('Nama', 'spesialis', 'rumahsakit')
+    ordering = ('Nama',)
     list_filter = ('spesialis', 'rumahsakit')
     search_fields = ('nama',)
+    filter_horizontal = ('spesialis', 'rumahsakit')
 
 admin.site.register(Spesialis)

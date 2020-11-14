@@ -1,0 +1,56 @@
+{% extends 'template_index.html' %}
+
+{% block title %}
+    Dokter
+{% endblock title %}
+
+{% block body %}
+
+        <div class="content-wrapper" style="margin-bottom: 20px">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class='scrollmenu' id='sp'>
+                    <a href="#" class="btn-active">Home</a>
+                </div>
+                <div class="content-body" id="content-body">
+                    <div class="box br-25">
+                        <img src='/static/img/banner.jpg' class="banner">
+                        <div class="text text-center bold">
+                            <h1>PIRUS</h1>
+                            <h4>Pusat Informasi Rumah Sakit Bandung Dan Cimahi</h4>
+                        </div>
+                    </div>
+                    <div class="row pb-20">
+                        <div class="col-md-6 pl-20 pr-20 pt-15">
+                            <a href="/RumahSakit/" class="style-none">
+                                <div class="card text-center br-20 box-shadow-hover" style="background: white;border: 1px solid black;">
+                                    <div class="card-body pt-15">
+                                        <h5 class="card-title"><img src='/static/img/RS-icon.png' class="none"></h5>
+                                        <h4 class="card-text bold">Rumah Sakit</h4>
+                                        <h5 class="mb-20">Cari informasi dari rumah sakit yang ada</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-6 pr-20 pl-20 pt-15">
+                            <a href="/dokter/" class="style-none">
+                                <div class="card text-center br-20 box-shadow-hover" style="background: white;border: 1px solid black;">
+                                    <div class="card-body pt-15">
+                                        <h5 class="card-title"><img src='/static/img/doctor-large.png' class="none"></h5>
+                                        <h4 class="card-text bold">Dokter</h4>
+                                        <h5 class="mb-20">Cari Dokter di rumah sakit yang ada</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    {% endblock body %}
+
+    {% block javascript %}
+        <script src='/static/js/showmore.js'></script>
+    {% endblock javascript %}
+</html>
