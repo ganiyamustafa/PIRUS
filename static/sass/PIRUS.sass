@@ -19,6 +19,24 @@ html
   width: 100%;
   z-index: 9999999;
 
+.input-form
+  border-radius: 100px;
+  text-align: center;
+  border: 0px;
+  transition: 0.2s all;
+  &:hover, &:focus
+    background: $color-primary;
+    color: white;
+    &::placeholder
+      color: white;
+      opacity: 1; /* Firefox */
+
+    &:-ms-input-placeholder
+      color: white;
+
+    &::-ms-input-placeholder
+      color: white;
+
 div
   &.scrollmenu
     padding: $padding $padding $padding 0;
@@ -55,7 +73,11 @@ div
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-
+  &.vh-center
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
 //colors
 $white: #fff;
@@ -69,7 +91,7 @@ $white: #fff;
   background: $background !important;
   z-index: 999;
   overflow: hidden;
-  transition: 1s all ease;
+  transition: 0.6s all ease;
   
   img
     margin-top: 5px;
@@ -91,6 +113,24 @@ $white: #fff;
     z-index: -1;
     transition: all 0.6s ease;
 
+@mixin button($bg-color, $fg-color)
+  width: 100px;
+  background: $bg-color;
+  color: $fg-color;
+  border: 0;
+
+  &:hover
+    transition: 0.2s;
+    background: white;
+    color: black;
+
+.btn-cancel
+  @include button(red, white )
+  
+.btn-submit
+  @include button($color-primary, white)
+
+  
 @mixin animated-btn-3($height)
   &:before
     width: 100%;
@@ -104,11 +144,17 @@ $white: #fff;
 .animated-btn
   @include animated-btn(white, black, $color-primary, white)
 
+.animated-btn-active
+  @include animated-btn(white, white, $color-primary, $color-primary)
+
 .animated-btn-light
   @include animated-btn(black, white, white, $color-primary)
 
 .animated-btn-3
   @include animated-btn-3(300%)
+
+.animated-btn-3-md
+  @include animated-btn-3(250%)
 
 .animated-btn-3-lg
   @include animated-btn-3(600%)
@@ -183,11 +229,18 @@ $white: #fff;
       width: 55%;
       height: 200px;
 
+@mixin searchbox($width)
+  width: $width;
+  border-radius: 2*$border-radius;
+  border: 0px;
+  padding-left: $padding;
+
 .search-box
-    width: 100%;
-    border-radius: 2*$border-radius;
-    border: 0px;
-    padding-left: $padding;
+  @include searchbox(100%)
+
+.search-box-lg
+  @include searchbox(90%)
+  
 
 ul.list-style-none
   list-style-type: none
@@ -202,6 +255,30 @@ img
   &.icon
     width: 50px;
     height: 50px;
+  &.icon-2
+    width: 25px;
+    height: 25px;
+    box-shadow: -2px 1px 7px black;
+    border-radius: 100%;
+    &:hover
+      transition: 0.2s all;
+      filter: hue-rotate(180deg);
+
+.relative-ib
+  position: relative;
+  display: inline-box;
+  @mixin right-icon($top, $right)
+    position: absolute;
+    z-index: 1;
+    top: $top;
+    right: $right;
+  .right-icon-1
+    @include right-icon(10px , 20px)
+  .right-icon-2
+    @include right-icon(-5px , 20px)
+    // position: absolute;
+    // top: -10px; 
+    // right: 20px;
 
 .card-context
     padding: (1/2)*$padding 2*$padding (1/2)*$padding 2*$padding;

@@ -10,17 +10,26 @@ class Poliklinik(models.Model):
     def __str__(self):
         return self.poliklinik
 
+    class Meta:
+        ordering = ["poliklinik"]
+
 class Fasilitas(models.Model):
     fasilitas = models.CharField(max_length=50, unique=True, blank=False)
 
     def __str__(self):
         return self.fasilitas
 
+    class Meta:
+        ordering = ["fasilitas"]
+
 class Daerah(models.Model):
     daerah = models.CharField(max_length=50, unique=True, blank=False)
 
     def __str__(self):
         return self.daerah
+
+    class Meta:
+        ordering = ["daerah"]
 
 class RumahSakit(models.Model):
     nama = models.CharField(max_length=50, unique=True, blank=False)
@@ -39,6 +48,9 @@ class RumahSakit(models.Model):
 
     def __str__(self):
         return self.nama
+    
+    class Meta:
+        ordering = ["nama"]
 
 @receiver(models.signals.post_delete, sender=RumahSakit)
 def auto_delete_image_on_delete(sender, instance, **kwargs):

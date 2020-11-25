@@ -17,7 +17,7 @@ class About(View):
                     ['github.png', 'https://github.com/GaniyaMustafa'],
                     ['linkedin.png', 'www.linkedin.com/in/ganiya-mustafa-83a0b51a0'],
                     ['gmail.png', 'mailto:ganiyamustaga32@gmail.com']
-                ]
+                ],
              }
             ]
 

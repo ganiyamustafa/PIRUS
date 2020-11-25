@@ -1,0 +1,34 @@
+{% extends 'template_index.html' %}
+{% load compress %}
+
+{% block title %}
+    Rumah Sakit
+{% endblock title %}
+
+{% block _css %}
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss" href="/static/sass/form.sass" />
+    {% endcompress %}
+{% endblock _css %}
+
+{% block body %}
+
+<div class="content-wrapper" style="margin-bottom: 20px">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="content-body relative-ib" id="content-body">
+            <div class="row text-center">
+                <h3 class="mb-20">Delete Rumah Sakit</h3>
+                <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% comment %} {{form.as_p}} {% endcomment %}
+                    <p>Are you Sure to delete {{ object }}?</p>
+                    <input type="submit" value="Yes" class="btn-submit">
+                    <button class="btn-cancel">No</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock body %}

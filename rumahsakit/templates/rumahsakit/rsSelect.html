@@ -10,10 +10,29 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class='scrollmenu' id='sp'>
-                    <a href="/RumahSakit/{{rs_requested}}/" id="btn-rs" class="btn-active">Rumah Sakit</a>
-                    <a href="/RumahSakit/dokter/{{rs_requested}}/" id="btn-dokter">Dokter</a>
+                    <a href="/RumahSakit/{{rs_requested}}/" id="btn-rs" class="animated-btn-active">Rumah Sakit</a>
+                    <a href="/RumahSakit/dokter/{{rs_requested}}/" id="btn-dokter" class="animated-btn-light animated-btn-3-md">Dokter</a>
                 </div>
-                <div class="content-body" id="content-body">
+                <div class="content-body relative-ib" id="content-body">
+                    {% if user.is_authenticated %}
+                        {% for rs in rumahsakit %}
+                            {% if user.role == 'A'%}
+                                <div class="right-icon-1">
+                                    <a href="/{{rs.id}}/RumahSakit/edit/"><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
+                                    <a href="/{{rs.id}}/RumahSakit/delete/"><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
+                                </div>
+                            {% elif user.role == 'D'%}
+                                {% for userrs in userdata.rumahsakit %}
+                                    {% if rs.id == userrs.rumahsakit %}
+                                        <div class="right-icon-1">
+                                            <a href="/{{rs.id}}/RumahSakit/edit/"><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
+                                            <a href="/{{rs.id}}/RumahSakit/delete/"><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
+                                        </div>
+                                    {% endif %}    
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                     {% for rs in rumahsakit %}
                         <img src='/media/{{rs.image}}/'>
                         <div class="pr-20">

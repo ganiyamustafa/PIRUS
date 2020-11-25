@@ -15,6 +15,9 @@
                 <link rel="stylesheet" type="text/x-scss" href="/static/sass/PIRUS.sass" />
             {% endcompress %}
 
+            {% block _css %}
+            {% endblock _css %}
+
             <title>{% block title %} {% endblock title %}</title>
         {% endblock head %}
     </head>
@@ -95,6 +98,7 @@
                             <p>
                             {{user.username|title}}
                             <small>Member since {{user.date_joined|date:'d M yy'}}</small>
+                            <small>{% if user.role == 'D' %}Direktur RS{% else %}Admin{% endif %}</small>
                             </p>
                         {% else %}
                             <p>

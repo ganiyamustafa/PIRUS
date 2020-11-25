@@ -10,9 +10,28 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class='scrollmenu' id='sp'>
-                    <a href="#" class="btn-active">Dokter</a>
+                    <a href="#" class="animated-btn-active animated-btn-3">Dokter</a>
                 </div>
-                <div class="content-body" id="content-body">
+                <div class="content-body relative-ib" id="content-body">
+                    {% if user.is_authenticated %}
+                        {% if user.role == 'A'%}
+                            <div class="right-icon-1">
+                                <a href=""><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
+                                <a href=""><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
+                            </div>
+                        {% elif user.role == 'D'%}
+                            {% for rumahsakit in rumahsakits %}
+                                {% for userrs in userdata.rumahsakit %}
+                                    {% if rumahsakit.id == userrs.rumahsakit %}
+                                        <div class="right-icon-1">
+                                            <a href=""><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
+                                            <a href=""><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
+                                        </div>
+                                    {% endif %}    
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
                     <div class="row text-center">
                         <div class="col-md-6">
                             {% for dokter in dokters %}

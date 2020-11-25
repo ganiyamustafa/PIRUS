@@ -25,8 +25,16 @@
         </ol>
         </section>
         
-        <section class="content container-fluid">
-
+        <section class="content container-fluid relative-ib">
+            {% if user.is_authenticated %}
+                {% if user.role == 'A' %}
+                    <div class="mb-10">
+                        <div class="right-icon-2">
+                            <a href=""><img src="/static/img/add.jpg" alt="add-icon" class="icon-2"></a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
             <div id="replaceable-content">
                 {% include 'dokter/dokter-result-partial.html' %}
             </div>

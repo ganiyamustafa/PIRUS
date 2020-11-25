@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.template.loader import render_to_string
@@ -7,6 +8,9 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
 from rumahsakit.models import RumahSakit, Daerah, Poliklinik, Fasilitas
 from dokter.models import Spesialis, Doctor
+from akun.models import DirekturRS
+from akun.views import getUserData
+from rumahsakit.forms import CreateRumahSakitForm
 
 # def get_rs_data(daerah):
 #     rumahsakit = 
@@ -52,6 +56,7 @@ class searchRS(View):
         context = {
             'daerah' : daerah,
             'RumahSakit' : paginate_RS(rumahsakit, request),
+            'userdata' : getUserData(request),
         }
         if request.is_ajax():
             html = render_to_string(
@@ -109,6 +114,7 @@ class selectRS(View):
                 'fasilitas' : fasilitas,
                 'url' : url,
                 'rs_requested' : rs_request,
+                'userdata' : getUserData(request),
             }
 
             return render(request, 'rumahsakit/rsSelect.html', context)
@@ -130,7 +136,9 @@ class selectRS(View):
                 'dokter': paginate_RS(dokter, request),
                 'spesialis': spesialis,
                 'rs_requested' : rs_request,
+                'rumahsakits' : rumahsakit,
                 'spesialis_dokter': spesialis_dokters,
+                'userdata' : getUserData(request),
             }
 
             if request.is_ajax():
@@ -145,3 +153,57 @@ class selectRS(View):
 
             return render(request, 'rumahsakit/dokterRsSelect.html', context)
 
+class rumahsakitCreate(CreateView): 
+    model = RumahSakit
+    form_class = CreateRumahSakitForm
+
+    def get(self, *args, **kwargs):
+        authenticated = False
+        return super().get(*args, **kwargs) if self.request.user.role == 'A' else redirect('/RumahSakit/')
+        
+
+    def get_success_url(self):
+        return '/RumahSakit/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+class rumahsakitUpdate(UpdateView):
+    model = RumahSakit
+    form_class = CreateRumahSakitForm
+
+    def get(self, *args, **kwargs):
+        authenticated = False
+        if self.request.user.role == 'A':
+            return super().get(*args, **kwargs)
+        elif self.request.user.role == 'D':
+            rsuser = DirekturRS.objects.values('id', 'rumahsakit').filter(user=self.request.user.id)
+            for direktur in rsuser:
+                if direktur['rumahsakit'] == int(self.request.get_full_path().split('/')[1]):
+                    authenticated = True
+                    break
+                else: authenticated = False
+            return super().get(*args, **kwargs) if authenticated else redirect('/RumahSakit/')
+
+    def get_success_url(self):
+        return '/RumahSakit/'
+
+class rumahsakitDelete(DeleteView):
+    model = RumahSakit
+
+    def get(self, *args, **kwargs):
+        authenticated = False
+        if self.request.user.role == 'A':
+            return super().get(*args, **kwargs)
+        elif self.request.user.role == 'D':
+            rsuser = DirekturRS.objects.values('id', 'rumahsakit').filter(user=self.request.user.id)
+            for direktur in rsuser:
+                if direktur['rumahsakit'] == int(self.request.get_full_path().split('/')[1]):
+                    authenticated = True
+                    break
+                else: authenticated = False
+            return super().get(*args, **kwargs) if authenticated else redirect('/RumahSakit/')
+
+    def get_success_url(self):
+        return '/RumahSakit/'

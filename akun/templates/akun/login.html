@@ -1,18 +1,50 @@
-<form method="post">
-    {% csrf_token %}
-    {% comment %} {{form.as_ul}} {% endcomment %}
-    <div class="form-group">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load compress %}
+        {% load static %}
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="/static/css/bootstrap.min.css" rel="stylesheet">  
+            <link href="/static/css/font-awesome.min.css" rel="stylesheet">
 
-        <label for="{{ form.username.id_for_label }}">Username:</label>
-        {{ form.username }}
-        {{ form.username.errors }} a
-
-    </div>
-    <div class="form-group">
-
-        <label for="{{ form.password.id_for_label }}">Password:</label>
-        {{ form.password }}
-        {{ form.password.errors }}
-    </div>
-    <button type="submit">Login</button>
-</form>
+            {% compress css %}
+                <link rel="stylesheet" type="text/x-scss" href="{% static 'sass/PIRUS.sass' %}" />
+                <link rel="stylesheet" type="text/x-scss" href="{% static 'sass/login.sass' %}" />
+            {% endcompress %}
+        <title> Login </title>
+    </head>
+    <body class="hold-transition skin-black-light sidebar-mini">
+        <div class="container" id="container">
+            <div class="form-container log-in-container">
+                <form method="post">
+                    {% csrf_token %}
+                    <h1>Login</h1>
+                    <div class="social-container">
+                        <img src="/static/img/logo.png" class="logo-icon">
+                    </div>
+                    <span>Log in with your account</span>
+                    <div class="input-icons">
+                        <i class="fa fa-user icon"></i> 
+                        {{ form.username }}
+                        <i class="fa fa-key icon"></i> 
+                        {{ form.password }}
+                    </div>
+                    {% comment %} <a href="#">Forgot your password?</a> {% endcomment %}
+                    <button class="animated-btn animated-btn-3">Log In</button>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-right">
+                        <h1>PIRUS</h1>
+                        <div class="social-container">
+                            <img src="/static/img/logo.png">
+                        </div>
+                        <p>Pusat Informasi Rumah Sakit Bandung Dan Cimahi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

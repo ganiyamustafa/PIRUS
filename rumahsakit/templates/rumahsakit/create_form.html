@@ -1,0 +1,96 @@
+{% extends 'template_index.html' %}
+{% load compress %}
+
+{% block title %}
+    Rumah Sakit
+{% endblock title %}
+
+{% block _css %}
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss" href="/static/sass/form.sass" />
+    {% endcompress %}
+{% endblock _css %}
+
+{% block body %}
+
+<div class="content-wrapper" style="margin-bottom: 20px">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="content-body relative-ib" id="content-body">
+            <div class="row text-center">
+                <h3 class="mb-20">ADD Rumah Sakit</h3>
+                <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% comment %} {{form.as_p}} {% endcomment %}
+                    <ul class="list-style-none mr-35">
+                        <li><label for="nama" class="mb-10">Nama</label></li>
+                        <li>{{form.nama}}</li>
+                        <li><label for="alamat" class="mb-10">Alamat</label></li>
+                        <li>{{form.alamat}}</li>
+                        <li><label for="no_telp" class="mb-10">No Telpon</label></li>
+                        <li>{{form.no_telp}}</li>
+                        <li><label for="deskripsi" class="mb-10">Deskripsi</label></li>
+                        <li>{{form.deskripsi}}</li>
+                        <li><label for="file-upload-field" class="mb-10">Image</label></li>
+                        <li>
+                            <div class="file-upload-wrapper" data-text="Select your image!">
+                                {{form.image}}
+                            </div>
+                        </li>
+                        <li><label for="deskripsi" class="mb-10">Poliklinik</label></li>
+                        <li>
+                            {{form.poliklinik}}
+                        </li>
+                        <li><label for="deskripsi" class="mb-10">Fasilitas</label></li>
+                        <li>
+                            {{form.fasilitas}}
+                        </li>
+                        <li><label for="deskripsi" class="mb-10">Daerah</label></li>
+                        <li>
+                            {{form.daerah}}
+                        </li>
+                        <li>
+                            <input type="submit">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock body %}
+
+{% block javascript %}
+    <script src="/static/js/multiselect.min.js"></script>
+    <script>
+        $("form").on("change", ".file-upload-field", function(){
+            $(this).parent(".file-upload-wrapper").attr("data-text", $(this).val().replace(/.*(\/|\\)/, ''));
+        });
+    </script>
+    <script>
+    $(document).ready(function() {
+        // make code pretty
+        window.prettyPrint && prettyPrint();
+
+        $('#poliklinik').multiselect({
+            search: {
+                left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+            },
+            fireSearch: function(value) {
+                return value.length > 3;
+            }
+        });
+        $('#fasilitas').multiselect({
+            search: {
+                left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+            },
+            fireSearch: function(value) {
+                return value.length > 3;
+            }
+        });
+    });
+    </script>
+{% endblock javascript %}

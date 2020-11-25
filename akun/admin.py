@@ -28,11 +28,11 @@ class AdminAdmin(admin.ModelAdmin):
 @admin.register(DirekturRS)
 class DirekturRSAdmin(admin.ModelAdmin):
     list_display = ('nama', 'no_telp', 'email')
-    list_filter = ('rumahsakit',)
 
     fieldsets = (
         ('Profil DirekturRS', {'fields': ('user', 'nama', 'no_telp', 'email')}),
         ('Rumah Sakit', {'fields': ('rumahsakit',)}),        
     )
+    filter_horizontal = ('rumahsakit',)
     search_fields = ('nama', 'rumahsakit')
-    ordering = ('nama', 'rumahsakit')
+    ordering = ('nama',)

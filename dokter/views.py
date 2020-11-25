@@ -5,6 +5,7 @@ from rumahsakit.models import RumahSakit, Daerah
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
+from akun.views import getUserData
 
 def paginate_Dokter(data, request):
     page = request.GET.get('page', 1)
@@ -45,6 +46,7 @@ class SearchDokter(View):
             'dokter': paginate_Dokter(dokter, request),
             'spesialis': spesialis,
             'spesialis_dokter' : spesialis_dokter,
+            'userdata' : getUserData(request),
         }
 
         if request.is_ajax():
@@ -83,6 +85,7 @@ class selectDokter(View):
             'rumahsakits' : rumahsakit,
             'spesialiss' : spesialis,
             'daerahs' : daerah,
+            'userdata' : getUserData(request),
         }
 
         return render(request, 'dokter/dokter-detail.html', context)
