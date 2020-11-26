@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from dokter.models import Doctor, Spesialis
+from akun.models import DirekturRS
+from dokter.forms import CreateDokterForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from rumahsakit.models import RumahSakit, Daerah
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -89,4 +92,70 @@ class selectDokter(View):
         }
 
         return render(request, 'dokter/dokter-detail.html', context)
+
+class dokterCreate(CreateView): 
+    model = Doctor
+    form_class = CreateDokterForm
+
+    def get(self, *args, **kwargs):
+        return super().get(*args, **kwargs) if self.request.user.role == 'A' else redirect('/dokter/')
+        
+
+    def get_success_url(self):
+        return '/dokter/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+class dokterUpdate(UpdateView):
+    model = Doctor
+    form_class = CreateDokterForm
+
+    def get(self, *args, **kwargs):
+        authenticated = False
+        if self.request.user.role == 'A':
+            return super().get(*args, **kwargs)
+        elif self.request.user.role == 'D':
+            rumahsakits = Doctor.objects.values('id', 'rumahsakit').filter(id=int(self.request.get_full_path().split('/')[1]))
+            rsuser = DirekturRS.objects.values('id', 'rumahsakit').filter(user=self.request.user.id)
+
+            if rumahsakits:
+                for direktur in rsuser:
+                    for rumahsakit in rumahsakits:
+                        if direktur['rumahsakit'] == rumahsakit['rumahsakit']:
+                            authenticated = True
+                            break
+                        else: authenticated = False
+                    if authenticated: break
+            else: authenticated = False
+            return super().get(*args, **kwargs) if authenticated else redirect('/dokter/')
+
+    def get_success_url(self):
+        return '/dokter/'
+
+class dokterDelete(DeleteView):
+    model = Doctor
+
+    def get(self, *args, **kwargs):
+        authenticated = False
+        if self.request.user.role == 'A':
+            return super().get(*args, **kwargs)
+        elif self.request.user.role == 'D':
+            rumahsakit = Doctor.objects.values('id', 'rumahsakit').filter(id=int(self.request.get_full_path().split('/')[1]))
+            rsuser = DirekturRS.objects.values('id', 'rumahsakit').filter(user=self.request.user.id)
+
+            if rumahsakits:
+                for direktur in rsuser:
+                    for rumahsakit in rumahsakits:
+                        if direktur['rumahsakit'] == rumahsakit['rumahsakit']:
+                            authenticated = True
+                            break
+                        else: authenticated = False
+                    if authenticated: break
+            else: authenticated = False
+            return super().get(*args, **kwargs) if authenticated else redirect('/dokter/')
+
+    def get_success_url(self):
+        return '/dokter/'
 

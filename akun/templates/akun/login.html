@@ -29,6 +29,7 @@
                         {{ form.username }}
                         <i class="fa fa-key icon"></i> 
                         {{ form.password }}
+                        {{form.non_field_errors.as_text}}
                     </div>
                     {% comment %} <a href="#">Forgot your password?</a> {% endcomment %}
                     <button class="animated-btn animated-btn-3">Log In</button>
