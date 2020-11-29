@@ -14,9 +14,9 @@ class About(View):
                 'pendidikan': 'SMKN 1 CIMAHI',
                 'deskripsi': 'Nama Saya Ganiya Mustafa, disini saya bekerja sebagai Fullstack Developer. Pengalaman saya dalam membuat website ini cukup menyenangkan walaupun memiliki banyak kendala',
                 'social': [
-                    ['github.png', 'https://github.com/GaniyaMustafa'],
-                    ['linkedin.png', 'www.linkedin.com/in/ganiya-mustafa-83a0b51a0'],
-                    ['gmail.png', 'mailto:ganiyamustaga32@gmail.com']
+                    ['fa-github', 'https://github.com/GaniyaMustafa'],
+                    ['fa-linkedin', 'https://www.linkedin.com/in/ganiya-mustafa-83a0b51a0'],
+                    ['fa-envelope', 'mailto:ganiyamustaga32@gmail.com']
                 ],
              }
             ]
