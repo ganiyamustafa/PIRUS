@@ -16,7 +16,7 @@
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
-                <a href='/dokter/{{doctor.slug}}/'>
+                <a href="{% url 'dokter_selected' doctor.slug %}">
                   <li class="list-group-item btn btn-1 br-20-blr">
                     <svg>
                       <rect x="0" y="0" fill="none" width="100%" height="100%"/>

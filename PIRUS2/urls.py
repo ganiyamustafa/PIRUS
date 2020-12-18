@@ -8,8 +8,8 @@ urlpatterns = [
     path('', views.Index.as_view()),
     path('about/', views.About.as_view()),
     path('admin/', admin.site.urls),
-    path('', include('rumahsakit.urls')),
+    path('rumahsakit/', include('rumahsakit.urls')),
     path('', include('akun.urls')),
-    path('', include('dokter.urls')),
+    path('dokter/', include('dokter.urls')),
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
 ]

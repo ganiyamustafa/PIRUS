@@ -135,8 +135,8 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="{% if request.path == '/RumahSakit/'%} active {% endif %}"><a href="/RumahSakit/"><i class="fa fa-link"></i> <span>Rumah Sakit</span></a></li>
-                <li class="{% if request.path == '/dokter/'%} active {% endif %}"><a href="/dokter/"><i class="fa fa-link"></i> <span>Dokter</span></a></li>
+                <li class="{% if request.path == '/RumahSakit/'%} active {% endif %}"><a href="{% url 'rumahsakit' %}"><i class="fa fa-link"></i> <span>Rumah Sakit</span></a></li>
+                <li class="{% if request.path == '/dokter/'%} active {% endif %}"><a href="{% url 'dokter' %}"><i class="fa fa-link"></i> <span>Dokter</span></a></li>
                 <li class="{% if request.path == '/about/'%} active {% endif %}"><a href="/about/"><i class="fa fa-link"></i> <span>About</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->

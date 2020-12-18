@@ -1,7 +1,7 @@
 from django.db import models
 from django.dispatch import receiver
-import os
 from django.utils.text import slugify
+import os
 
 class Poliklinik(models.Model):
     poliklinik = models.CharField(max_length=50, unique=True, blank=False)
@@ -33,7 +33,7 @@ class Daerah(models.Model):
 
 class RumahSakit(models.Model):
     nama = models.CharField(max_length=50, unique=True, blank=False)
-    image = models.ImageField(upload_to="img/RS/")
+    image = models.ImageField(upload_to="img/RS/", blank=True)
     alamat = models.TextField(max_length=100, blank=False)
     no_telp = models.CharField(max_length=50,)
     deskripsi = models.TextField(blank=False)

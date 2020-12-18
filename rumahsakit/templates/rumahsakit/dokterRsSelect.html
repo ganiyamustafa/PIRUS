@@ -10,18 +10,18 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class='scrollmenu' id='sp'>
-                    <a href="/RumahSakit/{{rs_requested}}/" id="btn-rs" class="animated-btn-light animated-btn-3-lg">Rumah Sakit</a>
-                    <a href="/RumahSakit/dokter/{{rs_requested}}/" id="btn-dokter" class="animated-btn-active">Dokter</a>
+                    <a href="{% url 'rs_selected' rs_requested %}" id="btn-rs" class="animated-btn-light animated-btn-3-lg">Rumah Sakit</a>
+                    <a href="{% url 'rs_dokter' rs_requested %}" id="btn-dokter" class="animated-btn-active">Dokter</a>
                     {% if user.is_authenticated %}
                         {% for rumahsakit in rumahsakits %}
                             {% if user.role == 'A'%}
-                                <a href="/RumahSakit/dokter/{{rs_requested}}/" id="btn-dokter" class="animated-btn-light animated-btn-3-md">Edit</a>
-                                <a href="/RumahSakit/dokter/{{rs_requested}}/" id="btn-dokter" class="animated-btn-light animated-btn-3-md">Delete</a>
+                                <a href="{% url 'rs_update' rumahsakit.id %}" id="btn-dokter" class="animated-btn-light animated-btn-3-md">Edit</a>
+                                <a href="{% url 'rs_delete' rumahsakit.id %}" id="btn-dokter" class="animated-btn-light animated-btn-3-md">Delete</a>
                             {% elif user.role == 'D'%}
                                 {% for userrs in userdata.rumahsakit %}
                                     {% if rumahsakit.id == userrs.rumahsakit %}
-                                        <a href="/RumahSakit/dokter/{{rs_requested}}/" id="btn-dokter" class="animated-btn-light animated-btn-3-md">Edit</a>
-                                        <a href="/RumahSakit/dokter/{{rs_requested}}/" id="btn-dokter" class="animated-btn-light animated-btn-3-md">Delete</a>
+                                        <a href="{% url 'rs_update' rumahsakit.id %}" id="btn-dokter" class="animated-btn-light animated-btn-3-md">Edit</a>
+                                        <a href="{% url 'rs_delete' rumahsakit.id %}" id="btn-dokter" class="animated-btn-light animated-btn-3-md">Delete</a>
                                     {% endif %}    
                                 {% endfor %}
                             {% endif %}

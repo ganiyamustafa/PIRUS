@@ -5,9 +5,7 @@ from django.db.models.signals import post_save
 
 class UserManager(BaseUserManager):
     def create_user(self, role, username, password = None):
-        if not role or not username:
-            raise ValueError("Data is not complete")        
-
+        if not role or not username: raise ValueError("Data is not complete")
         user = self.model(role = role, username = username)
         if user.role == 'A':
             user.is_admin = True
@@ -60,7 +58,7 @@ class CustomUser(AbstractBaseUser):
             self.is_staff = True
             self.is_superuser = True
         elif self.role == 'D':
-            self.is_admin = True
+            self.is_admin = False
             self.is_staff = True
             self.is_superuser = False
         super(CustomUser, self).save(*args, **kwargs)

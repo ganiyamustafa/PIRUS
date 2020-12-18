@@ -1,0 +1,240 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+/* line 73, static/sass/form.sass */
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 100%; }
+
+/* line 79, static/sass/form.sass */
+.input__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  color: black;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s; }
+  /* line 51, static/sass/form.sass */
+  .input__field::placeholder {
+    color: transparent; }
+  /* line 53, static/sass/form.sass */
+  .input__field:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px; }
+  /* line 57, static/sass/form.sass */
+  .input__field:required, .input__field:invalid {
+    box-shadow: none; }
+  /* line 59, static/sass/form.sass */
+  .input__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #2f71b3ff, #2394c9);
+    border-image-slice: 1; }
+    /* line 60, static/sass/form.sass */
+    .input__field:focus ~ .form__label {
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-size: 1rem;
+      color: #2f71b3ff;
+      font-weight: 700; }
+
+/* line 83, static/sass/form.sass */
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b; }
+
+/* reset input */
+/* line 92, static/sass/form.sass */
+.file-upload-wrapper {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  border: 1px solid gray; }
+  /* line 102, static/sass/form.sass */
+  .file-upload-wrapper:after {
+    content: attr(data-text);
+    font-size: 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #ecf5fd;
+    padding: 10px 15px;
+    display: block;
+    width: calc(100% - 40px);
+    pointer-events: none;
+    z-index: 20;
+    line-height: 20px;
+    color: black;
+    border-radius: 5px 10px 10px 5px;
+    font-weight: 300; }
+  /* line 120, static/sass/form.sass */
+  .file-upload-wrapper:before {
+    cursor: pointer;
+    content: 'Upload';
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+    height: 40px;
+    background: #2f71b3ff;
+    color: #ecf5fd;
+    font-weight: 700;
+    z-index: 25;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0 15px;
+    text-transform: uppercase;
+    pointer-events: none;
+    border-radius: 0 5px 5px 0; }
+  /* line 140, static/sass/form.sass */
+  .file-upload-wrapper:hover:before {
+    transition: 0.2s;
+    background: #24588b; }
+  /* line 143, static/sass/form.sass */
+  .file-upload-wrapper:hover input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    cursor: pointer;
+    width: 100%; }
+
+/* line 159, static/sass/form.sass */
+.input-form {
+  width: 100%;
+  border-radius: 20px;
+  text-align: center;
+  background: transparent;
+  transition: 0.2s all;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: none; }
+  /* line 17, static/sass/form.sass */
+  .input-form:hover, .input-form:focus {
+    background: #2f71b3ff;
+    color: white; }
+    /* line 20, static/sass/form.sass */
+    .input-form:hover::placeholder, .input-form:focus::placeholder {
+      color: white;
+      opacity: 1;
+      /* Firefox */ }
+    /* line 24, static/sass/form.sass */
+    .input-form:hover:-ms-input-placeholder, .input-form:focus:-ms-input-placeholder {
+      color: white; }
+    /* line 27, static/sass/form.sass */
+    .input-form:hover::-ms-input-placeholder, .input-form:focus::-ms-input-placeholder {
+      color: white; }
+
+/* line 163, static/sass/form.sass */
+.area-form {
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+  background: transparent;
+  transition: 0.2s all;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: none; }
+  /* line 17, static/sass/form.sass */
+  .area-form:hover, .area-form:focus {
+    background: #2f71b3ff;
+    color: white; }
+    /* line 20, static/sass/form.sass */
+    .area-form:hover::placeholder, .area-form:focus::placeholder {
+      color: white;
+      opacity: 1;
+      /* Firefox */ }
+    /* line 24, static/sass/form.sass */
+    .area-form:hover:-ms-input-placeholder, .area-form:focus:-ms-input-placeholder {
+      color: white; }
+    /* line 27, static/sass/form.sass */
+    .area-form:hover::-ms-input-placeholder, .area-form:focus::-ms-input-placeholder {
+      color: white; }
+
+/* line 167, static/sass/form.sass */
+.search-form {
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+  background: transparent;
+  transition: 0.2s all;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: none;
+  background: white;
+  border: 1px solid gray; }
+
+/* line 170, static/sass/form.sass */
+.select-form {
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+  background: transparent;
+  transition: 0.2s all;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: none; }
+  /* line 17, static/sass/form.sass */
+  .select-form:hover, .select-form:focus {
+    background: #2f71b3ff;
+    color: white; }
+    /* line 20, static/sass/form.sass */
+    .select-form:hover::placeholder, .select-form:focus::placeholder {
+      color: white;
+      opacity: 1;
+      /* Firefox */ }
+    /* line 24, static/sass/form.sass */
+    .select-form:hover:-ms-input-placeholder, .select-form:focus:-ms-input-placeholder {
+      color: white; }
+    /* line 27, static/sass/form.sass */
+    .select-form:hover::-ms-input-placeholder, .select-form:focus::-ms-input-placeholder {
+      color: white; }
+  /* line 174, static/sass/form.sass */
+  .select-form option {
+    color: black;
+    background: transparent;
+    padding-left: 20px; }
+    /* line 178, static/sass/form.sass */
+    .select-form option:checked, .select-form option:hover {
+      color: white;
+      background: #2f71b3ff; }
+
+/* line 182, static/sass/form.sass */
+.multiple-form {
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+  background: transparent;
+  transition: 0.2s all;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: none; }
+  /* line 186, static/sass/form.sass */
+  .multiple-form option {
+    color: black;
+    background: transparent;
+    padding-left: 20px; }
+    /* line 190, static/sass/form.sass */
+    .multiple-form option:checked, .multiple-form option:hover {
+      color: white;
+      background: #2f71b3ff; }

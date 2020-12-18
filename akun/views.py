@@ -8,12 +8,9 @@ def getUserData(request):
         if request.user.role == 'D':
             data = DirekturRS.objects.values('id', 'user', 'no_telp', 'email').filter(user=request.user.id)[0]
             rss = DirekturRS.objects.values('rumahsakit').filter(user=request.user.id)[::1]
-            data.update({'rumahsakit' : rss})
-                
-        elif request.user.role == 'A':
-            data = Admin.objects.values('id', 'user', 'no_telp', 'email').filter(user=request.user.id)[0]
-    else:
-        data = ''
+            data.update({'rumahsakit' : rss})      
+        elif request.user.role == 'A': data = Admin.objects.values('id', 'user', 'no_telp', 'email').filter(user=request.user.id)[0]
+    else: data = ''
     return data
 
 class LoginUser(LoginView):

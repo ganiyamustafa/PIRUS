@@ -16,44 +16,72 @@
 <div class="content-wrapper" style="margin-bottom: 20px">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="content-body relative-ib" id="content-body">
-            <div class="row text-center">
-                <h3 class="mb-20">ADD Dokter</h3>
-                <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% comment %} {{form.as_p}} {% endcomment %}
-                    <ul class="list-style-none mr-35">
-                        <li><label for="nama" class="mb-10">Nama</label></li>
-                        <li>{{form.Nama}}</li>
-                        <li><label for="Jenkel" class="mb-10">Jenis Kelamin</label></li>
-                        <li>{{form.Jenkel}}</li>
-                        <li><label for="deskripsi" class="mb-10">tgl_lahir</label></li>
-                        <li>{{form.tgl_lahir}}</li>
-                        <li><label for="pengalaman" class="mb-10">Pengalaman</label></li>
-                        <li>{{form.pengalaman}}</li>
-                        <li><label for="pendidikan" class="mb-10">Pendidikan</label></li>
-                        <li>{{form.pendidikan}}</li>
-                        <li><label for="file-upload-field" class="mb-10">Image</label></li>
-                        <li>
-                            <div class="file-upload-wrapper" data-text="Select your image!">
-                                {{form.image}}
-                            </div>
-                        </li>
-                        <li style="{% if user.role == 'D' %}display: none{% endif %}"><label for="rumahsakit" class="mb-10">Rumah Sakit</label></li>
-                        <li style="{% if user.role == 'D' %}display: none{% endif %}">
-                            {{form.rumahsakit}}
-                        </li>
-                        <li><label for="spesialis" class="mb-10">Spesialis</label></li>
-                        <li>
-                            {{form.spesialis}}
-                        </li>
-                        <li>
-                            <input type="submit">
-                        </li>
-                    </ul>
-                </form>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="content-body relative-ib" id="content-body">
+                        {% comment %} {{form.as_p}} {% endcomment %}
+                            <ul class="list-style-none mr-35 pt-10 pb-10">
+                                <li><img id="img-preview" src="{% if image %} /media/{{image}} {% else %} /media/img/dokter/default.png {% endif %}" class="img-circle mb-10"></li>
+                                <li>
+                                    <div class="file-upload-wrapper" data-text="Select your image!">
+                                        {{form.image}}
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form__group field">
+                                        {{form.Nama}}
+                                        <label for="nama" class="form__label">Nama</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form__group field">
+                                        {{form.pengalaman}}
+                                        <label for="pengalaman" class="form__label">Pengalaman</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form__group field">
+                                        {{form.pendidikan}}
+                                        <label for="pengalaman" class="form__label">Pendidikan</label>
+                                    </div>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="content-body relative-ib" id="content-body">
+                        <ul class="list-style-none mr-35 pt-10 pb-10">
+                            <li><label for="Jenkel" class="mb-10">Jenis Kelamin</label></li>
+                            <li>{{form.Jenkel}}</li>
+                            <li>
+                                <div class="form__group field">
+                                    {{form.tgl_lahir}}
+                                    <label for="tgl_lahir" class="form__label">Tanggal Lahir</label>
+                                </div>
+                            </li>
+                            <li style="{% if user.role == 'D' %}display: none{% endif %}"><label for="rumahsakit" class="mb-10">Rumah Sakit</label></li>
+                            <li style="{% if user.role == 'D' %}display: none{% endif %}">
+                                {{form.rumahsakit}}
+                            </li>
+                            <li><label for="spesialis" class="mb-10">Spesialis</label></li>
+                            <li>
+                                {{form.spesialis}}
+                            </li>
+                            <li>
+                                <button class="btn btn-1">
+                                    <svg>
+                                        <rect x="0" y="0" fill="none" width="100%" height="100%"/>
+                                    </svg>
+                                    Submit
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
     </section>
 </div>
 
@@ -63,6 +91,11 @@
     <script src="/static/js/multiselect.min.js"></script>
     <script>
         $("form").on("change", ".file-upload-field", function(){
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#img-preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]); 
             $(this).parent(".file-upload-wrapper").attr("data-text", $(this).val().replace(/.*(\/|\\)/, ''));
         });
     </script>

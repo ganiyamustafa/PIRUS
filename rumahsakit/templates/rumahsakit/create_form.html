@@ -16,46 +16,70 @@
 <div class="content-wrapper" style="margin-bottom: 20px">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="content-body relative-ib" id="content-body">
-            <div class="row text-center">
-                <h3 class="mb-20">ADD Rumah Sakit</h3>
-                <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% comment %} {{form.as_p}} {% endcomment %}
-                    <ul class="list-style-none mr-35">
-                        <li><label for="nama" class="mb-10">Nama</label></li>
-                        <li>{{form.nama}}</li>
-                        <li><label for="alamat" class="mb-10">Alamat</label></li>
-                        <li>{{form.alamat}}</li>
-                        <li><label for="no_telp" class="mb-10">No Telpon</label></li>
-                        <li>{{form.no_telp}}</li>
-                        <li><label for="deskripsi" class="mb-10">Deskripsi</label></li>
-                        <li>{{form.deskripsi}}</li>
-                        <li><label for="file-upload-field" class="mb-10">Image</label></li>
-                        <li>
-                            <div class="file-upload-wrapper" data-text="Select your image!">
-                                {{form.image}}
-                            </div>
-                        </li>
-                        <li><label for="deskripsi" class="mb-10">Poliklinik</label></li>
-                        <li>
-                            {{form.poliklinik}}
-                        </li>
-                        <li><label for="deskripsi" class="mb-10">Fasilitas</label></li>
-                        <li>
-                            {{form.fasilitas}}
-                        </li>
-                        <li><label for="deskripsi" class="mb-10">Daerah</label></li>
-                        <li>
-                            {{form.daerah}}
-                        </li>
-                        <li>
-                            <input type="submit">
-                        </li>
-                    </ul>
-                </form>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="content-body relative-ib" id="content-body">
+                            <ul class="list-style-none mr-35 pt-10 pb-10">
+                                <li><img id="img-preview" src="{% if image %} /media/{{image}} {% endif %}" class="img-circle mb-10"></li>
+                                <li>
+                                    <div class="file-upload-wrapper" data-text="Select your image!">
+                                        {{form.image}}
+                                    </div>
+                                </li>
+                                <li><div class="form__group field">
+                                        {{form.nama}}
+                                        <label for="nama" class="form__label">Nama</label>
+                                    </div>
+                                </li>
+                                <li><div class="form__group field">
+                                        {{form.no_telp}}
+                                        <label for="no_telp" class="form__label">No Telepon</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="content-body relative-ib" id="content-body">
+                        <ul class="list-style-none mr-35 pt-10 pb-10">
+                            <li><div class="form__group field">
+                                    {{form.alamat}}
+                                    <label for="alamat" class="form__label">Alamat</label>
+                                </div>
+                            </li>
+                            <li><div class="form__group field">
+                                    {{form.deskripsi}}
+                                    <label for="deskripsi" class="form__label">Deskripsi</label>
+                                </div>
+                            </li>
+                            <li><label for="deskripsi" class="mb-10">Poliklinik</label></li>
+                            <li>
+                                {{form.poliklinik}}
+                            </li>
+                            <li><label for="deskripsi" class="mb-10">Fasilitas</label></li>
+                            <li>
+                                {{form.fasilitas}}
+                            </li>
+                            <li><label for="deskripsi" class="mb-10">Daerah</label></li>
+                            <li>
+                                {{form.daerah}}
+                            </li>
+                            <li>
+                                <button class="btn btn-1">
+                                    <svg>
+                                        <rect x="0" y="0" fill="none" width="100%" height="100%"/>
+                                    </svg>
+                                    Submit
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
     </section>
 </div>
 
@@ -65,6 +89,11 @@
     <script src="/static/js/multiselect.min.js"></script>
     <script>
         $("form").on("change", ".file-upload-field", function(){
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#img-preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]); 
             $(this).parent(".file-upload-wrapper").attr("data-text", $(this).val().replace(/.*(\/|\\)/, ''));
         });
     </script>

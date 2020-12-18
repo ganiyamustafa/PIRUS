@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 $color-primary: #2f71b3ff;
+$secondary: #2394c9;
+$gray: black;
 
 @mixin form($border-radius, $hover-bg)
     border-radius: $border-radius;
     text-align: center;
-    background: #ecf5fd;
+    background: transparent;
     transition: 0.2s all;
-    border: 0px;
+    border: 0;
+    border-bottom: 2px solid $gray;
     outline: none;
 
     @if $hover-bg            
@@ -33,6 +36,58 @@ $color-primary: #2f71b3ff;
     background: white;
     border: 1px solid gray;
 
+@mixin input__field()
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid $gray;
+    outline: 0;
+    font-size: 1.3rem;
+    color: black;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+
+    &::placeholder
+        color: transparent;
+    &:placeholder-shown ~ .form__label
+        font-size: 1.3rem;
+        cursor: text;
+        top: 20px;
+    &:required, &:invalid
+        box-shadow: none;
+    &:focus
+        ~ .form__label
+            position: absolute;
+            top: 0;
+            display: block;
+            transition: 0.2s;
+            font-size: 1rem;
+            color: $color-primary;
+            font-weight: 700;    
+        padding-bottom: 6px;  
+        font-weight: 700;
+        border-width: 3px;
+        border-image: linear-gradient(to right, $color-primary,$secondary);
+        border-image-slice: 1;
+.form__group
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 100%;
+
+.input__field
+    @include input__field()
+
+
+.form__label
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $gray;
+/* reset input */
 
 .file-upload-wrapper
   $defaultColor: $color-primary;
@@ -118,7 +173,7 @@ $color-primary: #2f71b3ff;
 
     option
         color: black;
-        background: #ecf5fd;
+        background: white;
         padding-left: 20px;
         &:checked, &:hover
             color: white;
@@ -130,7 +185,7 @@ $color-primary: #2f71b3ff;
 
     option
         color: black;
-        background: #ecf5fd;
+        background: transparent;
         padding-left: 20px;
         &:checked, &:hover
             color: white;

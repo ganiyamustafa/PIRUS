@@ -1,7 +1,7 @@
 from django.db import models
 from django.dispatch import receiver
-import os
 from django.utils.text import slugify
+import os
 
 class Spesialis(models.Model):
     spesialis = models.CharField(max_length=50, unique=True, blank=False)
@@ -18,7 +18,7 @@ class Doctor(models.Model):
     Nama = models.CharField(max_length=100, blank=False)
     Jenkel = models.CharField(max_length=1, choices=Jenkel_LIST, blank=False)
     tgl_lahir = models.DateField(auto_now=False, auto_now_add=False, blank=False)
-    image = models.ImageField(upload_to="img/dokter/", default='img/dokter/default.png')
+    image = models.ImageField(upload_to="img/dokter/", default='img/dokter/default.png', blank=True, null=True)
     pengalaman = models.CharField(max_length=3)
     pendidikan = models.CharField(max_length=100)
     rumahsakit = models.ManyToManyField("rumahsakit.RumahSakit", related_name='RumahSakit', blank=False, db_constraint=False) 
@@ -34,10 +34,10 @@ class Doctor(models.Model):
 
 @receiver(models.signals.post_delete, sender=Doctor)
 def auto_delete_image_on_delete(sender, instance, **kwargs):
-        if instance.image:
-            if os.path.isfile(instance.image.path):
-                if not 'default.png' in instance.image.path:
-                    os.remove(instance.image.path)
+    if instance.image:
+        if os.path.isfile(instance.image.path):
+            if not 'default.png' in instance.image.path:
+                os.remove(instance.image.path)
 
 @receiver(models.signals.pre_save, sender=Doctor)
 def auto_delete_image_on_change(sender, instance, **kwargs):

@@ -84,7 +84,15 @@ WSGI_APPLICATION = 'PIRUS2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
+        # 'ENGINE': 'djongo',
+        # 'NAME' : 'pirus',
+        # 'CLIENT' : {
+        #     'host': 'mongodb+srv://ganiyamustafa:Wwwgoogle@pirusdb.2rph4.mongodb.net/PIRUS?retryWrites=true&w=majority',
+        #     'username' : 'ganiyamustafa',
+        #     'password' : 'Wwwgoogle',
+        #     'authMechanism' : 'SCRAM-SHA-1',
+        # }
     }
 }
 
@@ -148,5 +156,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'akun.CustomUser'
-
-STATIC_URL = '/static/'

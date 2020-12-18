@@ -17,8 +17,8 @@
                         {% if user.role == 'A'%}
                             {% for dokter in dokters %}
                                 <div class="right-icon-1">
-                                    <a href="/{{dokter.id}}/dokter/edit/"><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
-                                    <a href="/{{dokter.id}}/dokter/delete/"><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
+                                    <a href="{% url 'dokter_update' dokter.id %}"><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
+                                    <a href="{% url 'dokter_delete' dokter.id %}"><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
                                 </div>
                             {% endfor %}
                         {% elif user.role == 'D'%}
@@ -27,8 +27,8 @@
                                     {% if rumahsakit.id == userrs.rumahsakit %}
                                         {% for dokter in dokters %}
                                             <div class="right-icon-1">
-                                                <a href="/{{dokter.id}}/dokter/edit/"><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
-                                                <a href="/{{dokter.id}}/dokter/delete/"><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
+                                                <a href="{% url 'dokter_update' dokter.id %}"><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
+                                                <a href="{% url 'dokter_delete' dokter.id %}"><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
                                             </div>
                                         {% endfor %}
                                     {% endif %}    
@@ -77,7 +77,7 @@
                                                 <li class="list-group-item"><b class="bg-primary card-context">{{daerah.daerah}}</b></li>
                                             {% endif %}
                                         {% endfor %}
-                                        <a href='/RumahSakit/{{rumahsakit.slug}}/'>
+                                        <a href="{% url 'rs_selected' rumahsakit.slug %}">
                                             <li class="list-group-item btn btn-1 br-20-blr">
                                                 <svg>
                                                   <rect x="0" y="0" fill="none" width="100%" height="100%"/>
