@@ -21,25 +21,24 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="content-body relative-ib" id="content-body">
-                            <ul class="list-style-none mr-35 pt-10 pb-10">
-                                <li><img id="img-preview" src="{% if image %} /media/{{image}} {% endif %}" class="img-circle mb-10"></li>
-                                <li>
-                                    <div class="file-upload-wrapper" data-text="Select your image!">
-                                        {{form.image}}
-                                    </div>
-                                </li>
-                                <li><div class="form__group field">
-                                        {{form.nama}}
-                                        <label for="nama" class="form__label">Nama</label>
-                                    </div>
-                                </li>
-                                <li><div class="form__group field">
-                                        {{form.no_telp}}
-                                        <label for="no_telp" class="form__label">No Telepon</label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </form>
+                        <ul class="list-style-none mr-35 pt-10 pb-10">
+                            <li><img id="img-preview" src="{% if image %} /media/{{image}} {% endif %}" class="img-circle mb-10"></li>
+                            <li>
+                                <div class="file-upload-wrapper" data-text="Select your image!">
+                                    {{form.image}}
+                                </div>
+                            </li>
+                            <li><div class="form__group field">
+                                    {{form.nama}}
+                                    <label for="nama" class="form__label">Nama</label>
+                                </div>
+                            </li>
+                            <li><div class="form__group field">
+                                    {{form.no_telp}}
+                                    <label for="no_telp" class="form__label">No Telepon</label>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-md-8">

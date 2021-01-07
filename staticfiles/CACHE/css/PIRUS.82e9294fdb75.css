@@ -1,0 +1,1150 @@
+/* line 7, static/sass/PIRUS.sass */
+body {
+  background-color: #eee; }
+
+/* line 10, static/sass/PIRUS.sass */
+html {
+  scroll-behavior: smooth; }
+
+/* line 13, static/sass/PIRUS.sass */
+#loader {
+  background: url("/static/anim/oie_trans.gif") no-repeat center center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999999; }
+
+/* line 22, static/sass/PIRUS.sass */
+.input-form {
+  border-radius: 100px;
+  text-align: center;
+  border: 0px;
+  transition: 0.2s all; }
+  /* line 27, static/sass/PIRUS.sass */
+  .input-form:hover, .input-form:focus {
+    background: #2f71b3ff;
+    color: white; }
+    /* line 30, static/sass/PIRUS.sass */
+    .input-form:hover::placeholder, .input-form:focus::placeholder {
+      color: white;
+      opacity: 1;
+      /* Firefox */ }
+    /* line 34, static/sass/PIRUS.sass */
+    .input-form:hover:-ms-input-placeholder, .input-form:focus:-ms-input-placeholder {
+      color: white; }
+    /* line 37, static/sass/PIRUS.sass */
+    .input-form:hover::-ms-input-placeholder, .input-form:focus::-ms-input-placeholder {
+      color: white; }
+
+/* line 41, static/sass/PIRUS.sass */
+div.sections-wrapper {
+  position: relative;
+  border-radius: 0.25rem;
+  height: fit-content;
+  padding-bottom: 1.5rem;
+  margin: 1rem;
+  margin-bottom: 1.5rem; }
+
+/* line 49, static/sass/PIRUS.sass */
+div.sections-header {
+  position: absolute;
+  left: 37.5%;
+  top: -20%;
+  max-width: 100%;
+  margin-top: -1.3rem;
+  font-size: 1.3rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  border-radius: 0.25rem; }
+  /* line 60, static/sass/PIRUS.sass */
+  div.sections-header img {
+    border-radius: 100%;
+    width: 100px;
+    height: 100px; }
+
+/* line 65, static/sass/PIRUS.sass */
+div.sections-body {
+  width: 100%;
+  padding-top: 0.5rem;
+  background: transparent;
+  margin-top: 0.5rem; }
+
+/* line 71, static/sass/PIRUS.sass */
+div.scrollmenu {
+  padding: 10px 10px 10px 0;
+  overflow: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none; }
+  /* line 77, static/sass/PIRUS.sass */
+  div.scrollmenu a {
+    cursor: pointer;
+    border-radius: 100px;
+    background-color: #fff;
+    margin-right: 5px;
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 5px 20px 5px 20px;
+    text-decoration: none; }
+    /* line 87, static/sass/PIRUS.sass */
+    div.scrollmenu a:hover, div.scrollmenu a:focus {
+      background-color: #2f71b3ff;
+      color: white !important; }
+
+/* line 90, static/sass/PIRUS.sass */
+div::-webkit-scrollbar {
+  display: none; }
+
+/* line 92, static/sass/PIRUS.sass */
+div.box {
+  position: relative;
+  display: inline-block;
+  background: #2f71b3ff;
+  color: white; }
+  /* line 98, static/sass/PIRUS.sass */
+  div.box img.banner {
+    opacity: 0.6; }
+  /* line 100, static/sass/PIRUS.sass */
+  div.box .text {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+
+/* line 106, static/sass/PIRUS.sass */
+div.vh-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+/* line 157, static/sass/PIRUS.sass */
+.btn-cancel {
+  width: 100px;
+  background: red;
+  color: white;
+  border: 0; }
+  /* line 152, static/sass/PIRUS.sass */
+  .btn-cancel:hover {
+    transition: 0.2s;
+    background: white;
+    color: black; }
+
+/* line 160, static/sass/PIRUS.sass */
+.btn-submit {
+  width: 100px;
+  background: #2f71b3ff;
+  color: white;
+  border: 0; }
+  /* line 152, static/sass/PIRUS.sass */
+  .btn-submit:hover {
+    transition: 0.2s;
+    background: white;
+    color: black; }
+
+/* line 174, static/sass/PIRUS.sass */
+.animated-btn {
+  position: relative;
+  display: block;
+  color: white !important;
+  font-size: 14px;
+  text-decoration: none;
+  background: #2f71b3ff !important;
+  z-index: 999;
+  overflow: hidden;
+  transition: 0.6s all ease; }
+  /* line 126, static/sass/PIRUS.sass */
+  .animated-btn img {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 50px !important;
+    height: 50px !important; }
+  /* line 132, static/sass/PIRUS.sass */
+  .animated-btn:hover {
+    background: transparent;
+    color: black !important; }
+  /* line 136, static/sass/PIRUS.sass */
+  .animated-btn:before {
+    background: white;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: all 0.6s ease; }
+
+/* line 177, static/sass/PIRUS.sass */
+.animated-btn-active {
+  position: relative;
+  display: block;
+  color: white !important;
+  font-size: 14px;
+  text-decoration: none;
+  background: #2f71b3ff !important;
+  z-index: 999;
+  overflow: hidden;
+  transition: 0.6s all ease; }
+  /* line 126, static/sass/PIRUS.sass */
+  .animated-btn-active img {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 50px !important;
+    height: 50px !important; }
+  /* line 132, static/sass/PIRUS.sass */
+  .animated-btn-active:hover {
+    background: transparent;
+    color: white !important; }
+  /* line 136, static/sass/PIRUS.sass */
+  .animated-btn-active:before {
+    background: #2f71b3ff;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: all 0.6s ease; }
+
+/* line 180, static/sass/PIRUS.sass */
+.animated-btn-light {
+  position: relative;
+  display: block;
+  color: black !important;
+  font-size: 14px;
+  text-decoration: none;
+  background: white !important;
+  z-index: 999;
+  overflow: hidden;
+  transition: 0.6s all ease; }
+  /* line 126, static/sass/PIRUS.sass */
+  .animated-btn-light img {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 50px !important;
+    height: 50px !important; }
+  /* line 132, static/sass/PIRUS.sass */
+  .animated-btn-light:hover {
+    background: transparent;
+    color: white !important; }
+  /* line 136, static/sass/PIRUS.sass */
+  .animated-btn-light:before {
+    background: #2f71b3ff;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: all 0.6s ease; }
+
+/* line 165, static/sass/PIRUS.sass */
+.animated-btn-3:before {
+  width: 100%;
+  height: 0%;
+  transform: translate(-50%, -50%) rotate(45deg); }
+
+/* line 170, static/sass/PIRUS.sass */
+.animated-btn-3:hover:before {
+  height: 300%; }
+
+/* line 165, static/sass/PIRUS.sass */
+.animated-btn-3-md:before {
+  width: 100%;
+  height: 0%;
+  transform: translate(-50%, -50%) rotate(45deg); }
+
+/* line 170, static/sass/PIRUS.sass */
+.animated-btn-3-md:hover:before {
+  height: 250%; }
+
+/* line 165, static/sass/PIRUS.sass */
+.animated-btn-3-lg:before {
+  width: 100%;
+  height: 0%;
+  transform: translate(-50%, -50%) rotate(45deg); }
+
+/* line 170, static/sass/PIRUS.sass */
+.animated-btn-3-lg:hover:before {
+  height: 600%; }
+
+/* line 193, static/sass/PIRUS.sass */
+.btn {
+  color: #fff;
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  transition: 0.35s ease-in-out;
+  font-size: 16px;
+  position: relative;
+  text-decoration: none;
+  width: 100%; }
+  /* line 205, static/sass/PIRUS.sass */
+  .btn:hover {
+    text-decoration: none; }
+
+/* line 211, static/sass/PIRUS.sass */
+.btn-1 {
+  background: #2d6dad; }
+  /* line 214, static/sass/PIRUS.sass */
+  .btn-1 svg {
+    left: 0;
+    position: absolute;
+    top: 0;
+    border-radius: 0px 0px 20px 20px !important;
+    width: 100%;
+    height: 100%; }
+  /* line 222, static/sass/PIRUS.sass */
+  .btn-1 rect {
+    fill: none;
+    stroke: #2f71b3ff;
+    stroke-width: 2;
+    stroke-dasharray: 422, 0;
+    transition: all 0.35s linear; }
+  /* line 229, static/sass/PIRUS.sass */
+  .btn-1:hover {
+    background: rgba(47, 113, 179, 0);
+    font-weight: 900; }
+    /* line 233, static/sass/PIRUS.sass */
+    .btn-1:hover rect {
+      stroke-width: 5;
+      stroke-dasharray: 15, 310;
+      stroke-dashoffset: 48;
+      transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1); }
+
+/* line 239, static/sass/PIRUS.sass */
+.box-shadow {
+  box-shadow: -2px 3px 13px black; }
+
+/* line 242, static/sass/PIRUS.sass */
+.box-shadow-hover {
+  transition: 0.2s; }
+  /* line 244, static/sass/PIRUS.sass */
+  .box-shadow-hover:hover {
+    box-shadow: -2px 3px 13px black; }
+
+/* line 247, static/sass/PIRUS.sass */
+.scroll-div-horizontal {
+  overflow-y: auto; }
+
+/* line 250, static/sass/PIRUS.sass */
+.content-body {
+  background-color: white;
+  border-radius: 25px; }
+  /* line 253, static/sass/PIRUS.sass */
+  .content-body img {
+    width: 100%;
+    height: 300px;
+    border-radius: 25px;
+    object-fit: cover; }
+    /* line 258, static/sass/PIRUS.sass */
+    .content-body img.profile {
+      width: 55%;
+      height: 200px; }
+
+/* line 268, static/sass/PIRUS.sass */
+.search-box {
+  width: 100%;
+  border-radius: 50px;
+  border: 0px;
+  padding-left: 10px; }
+
+/* line 271, static/sass/PIRUS.sass */
+.search-box-lg {
+  width: 90%;
+  border-radius: 50px;
+  border: 0px;
+  padding-left: 10px; }
+
+/* line 275, static/sass/PIRUS.sass */
+ul.list-style-none {
+  list-style-type: none; }
+  /* line 277, static/sass/PIRUS.sass */
+  ul.list-style-none li.list-group-line {
+    border-bottom: 1px solid #2f71b3ff;
+    padding-bottom: 5px;
+    margin-bottom: 5px; }
+
+/* line 283, static/sass/PIRUS.sass */
+img.object-fit {
+  object-fit: cover; }
+
+/* line 285, static/sass/PIRUS.sass */
+img.icon {
+  width: 50px;
+  height: 50px; }
+
+/* line 288, static/sass/PIRUS.sass */
+img.icon-2 {
+  width: 25px;
+  height: 25px;
+  box-shadow: -2px 1px 7px black;
+  border-radius: 100%; }
+  /* line 293, static/sass/PIRUS.sass */
+  img.icon-2:hover {
+    transition: 0.2s all;
+    filter: hue-rotate(180deg); }
+
+/* line 297, static/sass/PIRUS.sass */
+.relative-ib {
+  position: relative;
+  display: inline-box; }
+  /* line 305, static/sass/PIRUS.sass */
+  .relative-ib .right-icon-1 {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    right: 20px; }
+  /* line 307, static/sass/PIRUS.sass */
+  .relative-ib .right-icon-2 {
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 20px; }
+
+/* line 313, static/sass/PIRUS.sass */
+.card-context {
+  padding: 5px 20px 5px 20px;
+  border-radius: 20px; }
+
+/* line 317, static/sass/PIRUS.sass */
+.btn-active {
+  background-color: #2f71b3ff !important;
+  color: white !important; }
+
+/* line 321, static/sass/PIRUS.sass */
+.bold {
+  font-weight: bolder; }
+
+/* line 324, static/sass/PIRUS.sass */
+.br-20 {
+  border-radius: 20px; }
+
+/* line 327, static/sass/PIRUS.sass */
+.br-25 {
+  border-radius: 25px; }
+
+/* line 330, static/sass/PIRUS.sass */
+.br-20-blr {
+  border-radius: 0px 0px 20px 20px !important; }
+
+/* line 334, static/sass/PIRUS.sass */
+a:hover {
+  color: black !important; }
+
+/* line 336, static/sass/PIRUS.sass */
+a.style-none {
+  color: black;
+  text-decoration: none; }
+
+/* line 340, static/sass/PIRUS.sass */
+.pointer {
+  cursor: pointer;
+  transition: 0.5s; }
+  /* line 343, static/sass/PIRUS.sass */
+  .pointer:focus, .pointer:hover {
+    background-color: black !important; }
+
+/* line 347, static/sass/PIRUS.sass */
+.card-title img {
+  width: 100px;
+  height: 100px;
+  border: 3px black solid;
+  box-shadow: -1px 2px 10px black; }
+  /* line 352, static/sass/PIRUS.sass */
+  .card-title img.none {
+    border: 0;
+    box-shadow: 0px 0px 0px black !important; }
+
+/* line 356, static/sass/PIRUS.sass */
+.text-secondary {
+  color: #706f6f; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-5 {
+  padding-bottom: 5px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-5 {
+  padding-top: 5px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-5 {
+  padding-left: 5px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-5 {
+  padding-right: 5px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-5 {
+  margin-top: 5px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-5 {
+  margin-bottom: 5px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-5 {
+  margin-right: 5px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-5 {
+  margin-left: 5px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-10 {
+  padding-bottom: 10px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-10 {
+  padding-top: 10px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-10 {
+  padding-left: 10px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-10 {
+  padding-right: 10px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-10 {
+  margin-top: 10px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-10 {
+  margin-bottom: 10px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-10 {
+  margin-right: 10px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-10 {
+  margin-left: 10px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-15 {
+  padding-bottom: 15px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-15 {
+  padding-top: 15px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-15 {
+  padding-left: 15px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-15 {
+  padding-right: 15px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-15 {
+  margin-top: 15px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-15 {
+  margin-bottom: 15px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-15 {
+  margin-right: 15px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-15 {
+  margin-left: 15px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-20 {
+  padding-bottom: 20px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-20 {
+  padding-top: 20px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-20 {
+  padding-left: 20px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-20 {
+  padding-right: 20px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-20 {
+  margin-top: 20px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-20 {
+  margin-bottom: 20px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-20 {
+  margin-right: 20px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-20 {
+  margin-left: 20px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-25 {
+  padding-bottom: 25px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-25 {
+  padding-top: 25px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-25 {
+  padding-left: 25px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-25 {
+  padding-right: 25px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-25 {
+  margin-top: 25px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-25 {
+  margin-bottom: 25px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-25 {
+  margin-right: 25px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-25 {
+  margin-left: 25px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-30 {
+  padding-bottom: 30px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-30 {
+  padding-top: 30px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-30 {
+  padding-left: 30px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-30 {
+  padding-right: 30px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-30 {
+  margin-top: 30px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-30 {
+  margin-bottom: 30px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-30 {
+  margin-right: 30px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-30 {
+  margin-left: 30px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-35 {
+  padding-bottom: 35px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-35 {
+  padding-top: 35px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-35 {
+  padding-left: 35px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-35 {
+  padding-right: 35px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-35 {
+  margin-top: 35px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-35 {
+  margin-bottom: 35px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-35 {
+  margin-right: 35px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-35 {
+  margin-left: 35px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-40 {
+  padding-bottom: 40px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-40 {
+  padding-top: 40px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-40 {
+  padding-left: 40px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-40 {
+  padding-right: 40px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-40 {
+  margin-top: 40px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-40 {
+  margin-bottom: 40px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-40 {
+  margin-right: 40px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-40 {
+  margin-left: 40px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-45 {
+  padding-bottom: 45px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-45 {
+  padding-top: 45px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-45 {
+  padding-left: 45px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-45 {
+  padding-right: 45px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-45 {
+  margin-top: 45px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-45 {
+  margin-bottom: 45px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-45 {
+  margin-right: 45px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-45 {
+  margin-left: 45px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-50 {
+  padding-bottom: 50px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-50 {
+  padding-top: 50px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-50 {
+  padding-left: 50px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-50 {
+  padding-right: 50px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-50 {
+  margin-top: 50px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-50 {
+  margin-bottom: 50px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-50 {
+  margin-right: 50px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-50 {
+  margin-left: 50px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-55 {
+  padding-bottom: 55px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-55 {
+  padding-top: 55px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-55 {
+  padding-left: 55px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-55 {
+  padding-right: 55px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-55 {
+  margin-top: 55px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-55 {
+  margin-bottom: 55px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-55 {
+  margin-right: 55px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-55 {
+  margin-left: 55px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-60 {
+  padding-bottom: 60px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-60 {
+  padding-top: 60px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-60 {
+  padding-left: 60px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-60 {
+  padding-right: 60px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-60 {
+  margin-top: 60px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-60 {
+  margin-bottom: 60px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-60 {
+  margin-right: 60px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-60 {
+  margin-left: 60px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-65 {
+  padding-bottom: 65px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-65 {
+  padding-top: 65px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-65 {
+  padding-left: 65px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-65 {
+  padding-right: 65px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-65 {
+  margin-top: 65px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-65 {
+  margin-bottom: 65px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-65 {
+  margin-right: 65px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-65 {
+  margin-left: 65px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-70 {
+  padding-bottom: 70px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-70 {
+  padding-top: 70px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-70 {
+  padding-left: 70px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-70 {
+  padding-right: 70px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-70 {
+  margin-top: 70px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-70 {
+  margin-bottom: 70px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-70 {
+  margin-right: 70px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-70 {
+  margin-left: 70px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-75 {
+  padding-bottom: 75px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-75 {
+  padding-top: 75px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-75 {
+  padding-left: 75px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-75 {
+  padding-right: 75px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-75 {
+  margin-top: 75px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-75 {
+  margin-bottom: 75px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-75 {
+  margin-right: 75px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-75 {
+  margin-left: 75px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-80 {
+  padding-bottom: 80px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-80 {
+  padding-top: 80px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-80 {
+  padding-left: 80px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-80 {
+  padding-right: 80px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-80 {
+  margin-top: 80px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-80 {
+  margin-bottom: 80px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-80 {
+  margin-right: 80px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-80 {
+  margin-left: 80px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-85 {
+  padding-bottom: 85px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-85 {
+  padding-top: 85px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-85 {
+  padding-left: 85px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-85 {
+  padding-right: 85px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-85 {
+  margin-top: 85px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-85 {
+  margin-bottom: 85px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-85 {
+  margin-right: 85px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-85 {
+  margin-left: 85px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-90 {
+  padding-bottom: 90px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-90 {
+  padding-top: 90px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-90 {
+  padding-left: 90px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-90 {
+  padding-right: 90px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-90 {
+  margin-top: 90px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-90 {
+  margin-bottom: 90px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-90 {
+  margin-right: 90px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-90 {
+  margin-left: 90px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-95 {
+  padding-bottom: 95px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-95 {
+  padding-top: 95px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-95 {
+  padding-left: 95px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-95 {
+  padding-right: 95px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-95 {
+  margin-top: 95px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-95 {
+  margin-bottom: 95px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-95 {
+  margin-right: 95px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-95 {
+  margin-left: 95px; }
+
+/* line 361, static/sass/PIRUS.sass */
+.pb-100 {
+  padding-bottom: 100px; }
+
+/* line 363, static/sass/PIRUS.sass */
+.pt-100 {
+  padding-top: 100px; }
+
+/* line 365, static/sass/PIRUS.sass */
+.pl-100 {
+  padding-left: 100px; }
+
+/* line 367, static/sass/PIRUS.sass */
+.pr-100 {
+  padding-right: 100px; }
+
+/* line 369, static/sass/PIRUS.sass */
+.mt-100 {
+  margin-top: 100px; }
+
+/* line 371, static/sass/PIRUS.sass */
+.mb-100 {
+  margin-bottom: 100px; }
+
+/* line 373, static/sass/PIRUS.sass */
+.mr-100 {
+  margin-right: 100px; }
+
+/* line 375, static/sass/PIRUS.sass */
+.ml-100 {
+  margin-left: 100px; }
+
+/* line 378, static/sass/PIRUS.sass */
+.title {
+  font-weight: bolder;
+  padding-left: 20px; }
+
+/* line 382, static/sass/PIRUS.sass */
+.tooltips {
+  position: relative;
+  border-bottom: 1px dotted black; }
+  /* line 385, static/sass/PIRUS.sass */
+  .tooltips .tooltiptext {
+    display: none;
+    width: 350px;
+    background-color: #2f71b3ff;
+    color: white;
+    text-align: center;
+    padding: 5px 10px 5px 10px;
+    border-radius: 6px;
+    bottom: 110%;
+    left: 50%;
+    margin-left: -175px;
+    position: absolute;
+    z-index: 1; }
+    /* line 399, static/sass/PIRUS.sass */
+    .tooltips .tooltiptext .tooltiptext-title {
+      border-bottom: 1px solid white;
+      padding-bottom: 5px;
+      margin-bottom: 5px; }
+    /* line 404, static/sass/PIRUS.sass */
+    .tooltips .tooltiptext .tooltiptext-description {
+      padding: 10px;
+      background-color: white;
+      color: black;
+      margin-bottom: 5px; }
+    /* line 410, static/sass/PIRUS.sass */
+    .tooltips .tooltiptext i {
+      position: absolute;
+      top: 8px;
+      left: 10px; }
+  /* line 415, static/sass/PIRUS.sass */
+  .tooltips:hover .tooltiptext {
+    display: inline-block; }
+
+/* Show the tooltip text when you mouse over the tooltip container */
