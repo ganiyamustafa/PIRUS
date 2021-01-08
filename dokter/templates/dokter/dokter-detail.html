@@ -1,4 +1,5 @@
 {% extends 'template_index.html' %}
+{% load custom_tags %}
 
 {% block title %}
     Dokter
@@ -14,25 +15,13 @@
                 </div>
                 <div class="content-body relative-ib" id="content-body">
                     {% if user.is_authenticated %}
-                        {% if user.role == 'A'%}
+                        {% direktur_auth rumahsakits userdata.rumahsakit as direktur_auth %}
+                        {% if user.role == 'A' or direktur_auth %}
                             {% for dokter in dokters %}
                                 <div class="right-icon-1">
                                     <a href="{% url 'dokter_update' dokter.id %}"><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
                                     <a href="{% url 'dokter_delete' dokter.id %}"><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
                                 </div>
-                            {% endfor %}
-                        {% elif user.role == 'D'%}
-                            {% for rumahsakit in rumahsakits %}
-                                {% for userrs in userdata.rumahsakit %}
-                                    {% if rumahsakit.id == userrs.rumahsakit %}
-                                        {% for dokter in dokters %}
-                                            <div class="right-icon-1">
-                                                <a href="{% url 'dokter_update' dokter.id %}"><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
-                                                <a href="{% url 'dokter_delete' dokter.id %}"><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
-                                            </div>
-                                        {% endfor %}
-                                    {% endif %}    
-                                {% endfor %}
                             {% endfor %}
                         {% endif %}
                     {% endif %}

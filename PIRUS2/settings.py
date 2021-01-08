@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'dokter',
     'akun',
     'compressor',
-    'dal',
-    'dal_select2',
+    'core',
 ]
 
 MIDDLEWARE = [

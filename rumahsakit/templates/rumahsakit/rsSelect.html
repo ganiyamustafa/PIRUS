@@ -1,4 +1,5 @@
 {% extends 'template_index.html' %}
+{% load custom_tags %}
 
 {% block title %}
     Rumah Sakit
@@ -14,26 +15,16 @@
                     <a href="{% url 'rs_dokter' rs_requested %}" id="btn-dokter" class="animated-btn-light animated-btn-3-md">Dokter</a>
                 </div>
                 <div class="content-body relative-ib" id="content-body">
-                    {% if user.is_authenticated %}
-                        {% for rs in rumahsakit %}
-                            {% if user.role == 'A'%}
-                                <div class="right-icon-1">
-                                    <a href="{% url 'rs_update' rs.id %}"><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
-                                    <a href="{% url 'rs_delete' rs.id %}"><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
-                                </div>
-                            {% elif user.role == 'D'%}
-                                {% for userrs in userdata.rumahsakit %}
-                                    {% if rs.id == userrs.rumahsakit %}
-                                        <div class="right-icon-1">
-                                            <a href="{% url 'rs_update' rs.id %}"><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
-                                            <a href="{% url 'rs_delete' rs.id %}"><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
-                                        </div>
-                                    {% endif %}    
-                                {% endfor %}
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
                     {% for rs in rumahsakit %}
+                        {% if user.is_authenticated %}
+                            {% direktur_auth rumahsakit userdata.rumahsakit as direktur_auth %}
+                                {% if user.role == 'A' or direktur_auth %}
+                                    <div class="right-icon-1">
+                                        <a href="{% url 'rs_update' rs.id %}"><img src="/static/img/edit.png" alt="edit-icon" class="icon-2 mr-10"></a>
+                                        <a href="{% url 'rs_delete' rs.id %}"><img src="/static/img/deleted.png" alt="delete-icon" class="icon-2"></a>
+                                    </div>
+                                {% endif %}
+                        {% endif %}
                         <img src='/media/{{rs.image}}/'>
                         <div class="pr-20">
                             <h3 class="title">{{rs.nama}}</h3>

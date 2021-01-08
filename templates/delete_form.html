@@ -24,7 +24,7 @@
                 {% comment %} {{form.as_p}} {% endcomment %}
                     <p>Are you Sure to delete {{ object }}?</p>
                     <input type="submit" value="Yes" class="btn-submit">
-                    <button class="btn-cancel">No</button>
+                    <input type="button" value="No" class="btn-cancel" onclick="window.history.back()">
                 </form>
             </div>
         </div>

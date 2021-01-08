@@ -10,6 +10,17 @@ from dokter.models import Doctor, Spesialis
 from dokter.forms import CreateDokterForm
 from rumahsakit.models import RumahSakit, Daerah
 
+def check_auth(self):
+    rumahsakits = Doctor.objects.values('id', 'rumahsakit').filter(id=int(self.request.get_full_path().split('/')[2]))
+    rsuser = DirekturRS.objects.values('id', 'rumahsakit').filter(user=self.request.user.id)
+    rumahsakit_id = [rumahsakit['rumahsakit'] for rumahsakit in rumahsakits]
+    rumahsakit_id_confirm = [rumahsakit['rumahsakit'] for rumahsakit in rsuser]
+    if rumahsakits:
+        if any(item in rumahsakit_id for item in rumahsakit_id_confirm): authenticated = True
+        else: authenticated = False
+    else: authenticated = False
+    return authenticated
+
 def paginate_Dokter(data, request):
     page = request.GET.get('page', 1)
     paginator = Paginator(data, 6)
@@ -97,24 +108,10 @@ class dokterCreate(CreateView):
 class dokterUpdate(UpdateView):
     model = Doctor
     form_class = CreateDokterForm
-
+    
     def get(self, *args, **kwargs):
-        authenticated = False
         if self.request.user.role == 'A': return super().get(*args, **kwargs)
-        elif self.request.user.role == 'D':
-            rumahsakits = Doctor.objects.values('id', 'rumahsakit').filter(id=int(self.request.get_full_path().split('/')[2]))
-            rsuser = DirekturRS.objects.values('id', 'rumahsakit').filter(user=self.request.user.id)
-
-            if rumahsakits:
-                for direktur in rsuser:
-                    for rumahsakit in rumahsakits:
-                        if direktur['rumahsakit'] == rumahsakit['rumahsakit']:
-                            authenticated = True
-                            break
-                        else: authenticated = False
-                    if authenticated: break
-            else: authenticated = False
-            return super().get(*args, **kwargs) if authenticated else redirect('dokter')
+        elif self.request.user.role == 'D': return super().get(*args, **kwargs) if check_auth(self) else redirect('dokter')
 
     def get_context_data(self, **kwargs):
         context = super(dokterUpdate, self).get_context_data(**kwargs)
@@ -129,22 +126,8 @@ class dokterDelete(DeleteView):
     model = Doctor
 
     def get(self, *args, **kwargs):
-        authenticated = False
         if self.request.user.role == 'A': return super().get(*args, **kwargs)
-        elif self.request.user.role == 'D':
-            rumahsakit = Doctor.objects.values('id', 'rumahsakit').filter(id=int(self.request.get_full_path().split('/')[2]))
-            rsuser = DirekturRS.objects.values('id', 'rumahsakit').filter(user=self.request.user.id)
-
-            if rumahsakits:
-                for direktur in rsuser:
-                    for rumahsakit in rumahsakits:
-                        if direktur['rumahsakit'] == rumahsakit['rumahsakit']:
-                            authenticated = True
-                            break
-                        else: authenticated = False
-                    if authenticated: break
-            else: authenticated = False
-            return super().get(*args, **kwargs) if authenticated else redirect('dokter')
+        elif self.request.user.role == 'D': return super().get(*args, **kwargs) if check_auth(self) else redirect('dokter')
 
     def get_success_url(self):
         return '/dokter/'

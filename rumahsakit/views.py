@@ -10,6 +10,14 @@ from dokter.models import Spesialis, Doctor
 from akun.models import DirekturRS
 from akun.views import getUserData
 
+def check_auth(self):
+    rsuser = DirekturRS.objects.values('id', 'rumahsakit').filter(user=self.request.user.id)
+    rumahsakit_id = [direktur['rumahsakit'] for direktur in rsuser]
+    rumahsakit_id_confirm = [int(self.request.get_full_path().split('/')[2])]
+    if any(item in rumahsakit_id_confirm for item in rumahsakit_id): authenticated = True
+    else: authenticated = False
+    return authenticated
+
 def paginate_RS(data, request):
     page = request.GET.get('page', 1)
     paginator = Paginator(data, 6)
@@ -137,14 +145,7 @@ class rumahsakitUpdate(UpdateView):
     def get(self, *args, **kwargs):
         authenticated = False
         if self.request.user.role == 'A': return super().get(*args, **kwargs)
-        elif self.request.user.role == 'D':
-            rsuser = DirekturRS.objects.values('id', 'rumahsakit').filter(user=self.request.user.id)
-            for direktur in rsuser:
-                if direktur['rumahsakit'] == int(self.request.get_full_path().split('/')[2]):
-                    authenticated = True
-                    break
-                else: authenticated = False
-            return super().get(*args, **kwargs) if authenticated else redirect('rumahsakit')
+        elif self.request.user.role == 'D': return super().get(*args, **kwargs) if check_auth(self) else redirect('rumahsakit')
 
     def get_context_data(self, **kwargs):
         context = super(rumahsakitUpdate, self).get_context_data(**kwargs)
@@ -161,14 +162,7 @@ class rumahsakitDelete(DeleteView):
     def get(self, *args, **kwargs):
         authenticated = False
         if self.request.user.role == 'A': return super().get(*args, **kwargs)
-        elif self.request.user.role == 'D':
-            rsuser = DirekturRS.objects.values('id', 'rumahsakit').filter(user=self.request.user.id)
-            for direktur in rsuser:
-                if direktur['rumahsakit'] == int(self.request.get_full_path().split('/')[2]):
-                    authenticated = True
-                    break
-                else: authenticated = False
-            return super().get(*args, **kwargs) if authenticated else redirect('rumahsakit')
+        elif self.request.user.role == 'D': return super().get(*args, **kwargs) if check_auth(self) else redirect('rumahsakit')
 
     def get_success_url(self):
         return '/rumahsakit/'
