@@ -25,14 +25,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'dlpnven^)qo(j&9bd%2i#ac!wmtz+9%hr5&l2_uc*4)xa^-^0t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pirus.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -82,16 +84,16 @@ WSGI_APPLICATION = 'PIRUS2.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
-        # 'ENGINE': 'djongo',
-        # 'NAME' : 'pirus',
-        # 'CLIENT' : {
-        #     'host': 'mongodb+srv://ganiyamustafa:Wwwgoogle@pirusdb.2rph4.mongodb.net/PIRUS?retryWrites=true&w=majority',
-        #     'username' : 'ganiyamustafa',
-        #     'password' : 'Wwwgoogle',
-        #     'authMechanism' : 'SCRAM-SHA-1',
-        # }
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': str(BASE_DIR / 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        'NAME' : 'pirus',
+        'CLIENT' : {
+            'host': 'mongodb+srv://ganiyamustafa:Wwwgoogle@pirusdb.2rph4.mongodb.net/PIRUS?retryWrites=true&w=majority',
+            'username' : 'ganiyamustafa',
+            'password' : 'Wwwgoogle',
+            'authMechanism' : 'SCRAM-SHA-1',
+        }
     }
 }
 
@@ -145,6 +147,8 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+WHITENOISE_USE_FINDERS = True
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
@@ -155,3 +159,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'akun.CustomUser'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
