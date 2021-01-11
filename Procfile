@@ -1,1 +1,1 @@
-web: gunicorn PIRUS2.wsgi --log-file
+web: gunicorn PIRUS2.wsgi
