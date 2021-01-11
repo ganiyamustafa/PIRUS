@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'dlpnven^)qo(j&9bd%2i#ac!wmtz+9%hr5&l2_uc*4)xa^-^0t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['pirus.herokuapp.com']
 
