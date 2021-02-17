@@ -28,8 +28,8 @@
                         <img src='/media/{{rs.image}}/'>
                         <div class="pr-20">
                             <h3 class="title">{{rs.nama}}</h3>
-                            <p class=" pl-20"><a class="text-primary">{{rs.alamat}}</a></p>
-                            <p class="text-primary pl-20">{{rs.no_telp}}</p>
+                            <p class=" pl-20"><img src='/static/img/location.png' class="mr-15 icon-3-sm"><a target="_blank" href="https://maps.google.com/?q={{rs.nama}}" class="text-primary">{{rs.alamat}}</a></p>
+                            <p class="text-primary pl-20"><img src='/static/img/phone.png' class="mr-5 icon-3-md">{{rs.no_telp}}</p>
                             <p class="pl-20">{{rs.deskripsi}}</p>
                         </div>
                     {% endfor %}
