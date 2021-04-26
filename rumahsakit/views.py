@@ -1,13 +1,15 @@
+import string, random
 from django.shortcuts import render, redirect
 from django.views.generic import View
+from django.core.mail import EmailMultiAlternatives
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.template.loader import render_to_string
+from django.template.loader import render_to_string 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
-from rumahsakit.models import RumahSakit, Daerah, Poliklinik, Fasilitas
-from rumahsakit.forms import CreateRumahSakitForm
+from rumahsakit.models import RumahSakit, Daerah, Poliklinik, Fasilitas, RegisterHUMASRS, RegisterRumahSakit
+from rumahsakit.forms import CreateRumahSakitForm, RegisterRumahSakitForm, RegisterHUMASRSForm
 from dokter.models import Spesialis, Doctor
-from akun.models import DirekturRS
+from akun.models import DirekturRS, CustomUser
 from akun.views import getUserData
 
 def check_auth(self):
@@ -82,6 +84,168 @@ class selectRS(View):
         }
 
         return render(request, 'rumahsakit/rsSelect.html', context)
+
+class register_rumahsakit_step1(CreateView):
+    global step
+    step = 1
+    model = RegisterRumahSakit
+    form_class = RegisterRumahSakitForm
+
+    def form_valid(self, form):
+        global nama_rs 
+        nama_rs = form.instance.nama
+        return super(register_rumahsakit_step1, self).form_valid(form)
+
+    def get_success_url(self):
+        global step
+        step = 2
+        return '/rumahsakit/register/2/'
+
+class register_rumahsakit_step2(CreateView):
+    model = RegisterHUMASRS
+    form_class = RegisterHUMASRSForm
+
+    def get(self, *args, **kwargs):
+        return super().get(*args, **kwargs) if step and step == 2 else redirect('register_rs_1')
+
+    def form_valid(self, form):
+        global nama_humas 
+        nama_humas = form.instance.nama
+        return super(register_rumahsakit_step2, self).form_valid(form)
+
+    def get_success_url(self):
+        global step
+        step = 3
+        return '/rumahsakit/register/3/'
+
+class register_rumahsakit_step3(View):
+        
+    def get(self, request):
+        if step == 3:
+            # update reg_rs
+            register_rs = RegisterRumahSakit.objects.get(nama=nama_rs)
+            register_rs.is_finish_registered = True
+            register_rs.save()
+            # update reg_humas
+            register_humas = RegisterHUMASRS.objects.get(nama=nama_humas)
+            register_humas.register_rumahsakit = register_rs
+            register_humas.save()
+
+            return render(request, 'rumahsakit/register_rumahsakit/register_rumahsakit_step3.html')
+        else: return redirect('register_rs_1')
+
+class register_rumahsakit_lists(View):
+    def get(self, request):
+        reg_rs = RegisterRumahSakit.objects.all().filter(is_finish_registered=True, is_accepted=False).order_by('nama')
+        reg_humas = RegisterHUMASRS.objects.values('id', 'nama', 'email', 'no_telp', 'foto_diri', 'foto_ktp', 'register_rumahsakit').order_by('nama')
+        context = {
+            'register_rs_lists' : reg_rs,
+            'register_humas_lists' : reg_humas,
+        }
+        return render(request, 'rumahsakit/register_rumahsakit_admin.html', context)
+
+class register_rumahsakit_denied(View):
+    def get(self, request, pk):
+        reg_rs = RegisterRumahSakit.objects.get(id=pk)
+        reg_rs.delete()
+        return redirect('register_rs_list')
+
+class register_rumahsakit_accepted(View):
+    username_ = password_ = reg_rs = reg_humas = humas_rs = user_ = ''
+    def random_username_password(self):
+        pass_type = [1,2]
+        for a in range(0,8): 
+            if random.choice(pass_type) % 2 == 0: self.password_ += str(random.randint(0,9))
+            else: self.password_ += random.choice(string.ascii_letters)
+        for a in range(0,5): self.username_ += random.choice(string.ascii_letters)
+
+    def register_rumahsakit_updated(self, pk):
+        self.reg_rs = RegisterRumahSakit.objects.get(id=pk)
+        self.reg_rs.is_accepted = True
+        self.reg_rs.save()
+
+    def create_account(self):
+        self.user_ = CustomUser(username=self.username_, role='D')
+        self.user_.set_password(self.password_)
+        self.user_.save()
+
+    def create_humas_data(self, pk):
+        self.reg_humas = RegisterHUMASRS.objects.get(register_rumahsakit=self.reg_rs)
+        self.humas_rs = DirekturRS.objects.create(
+            user = self.user_,
+            nama = self.reg_humas.nama,
+            no_telp = self.reg_humas.no_telp,
+            email = self.reg_humas.email,
+        )
+        self.humas_rs.rumahsakit.set(RegisterRumahSakit.objects.filter(id__in=pk))
+        self.humas_rs.save()
+
+    def send_email(self):
+        subject, from_email, to = 'tes', 'pirus.apl@gmail.com', 'ganiyamustaga32@gmail.com'
+        text_content = 'tes'
+        context = { 
+                    'name': self.reg_humas.nama,
+                    'rumahsakit': self.reg_rs.nama,
+                    'username': self.username_,
+                    'password': self.password_,
+                  }
+        html_content = render_to_string('email_accepted.html', context)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, 'text/html')
+        msg.send()
+
+    def get(self, request, pk):
+        self.random_username_password()
+        self.register_rumahsakit_updated(pk)
+        self.create_account()
+        self.create_humas_data(pk)
+        self.send_email()
+        return redirect('register_rs_list')
+
+class rumahsakit_activated(View):
+    def get(self, request, pk):
+        pass
+
+    def post(self, request, pk):
+        reg_rs = RegisterRumahSakit.objects.get(id=pk)
+        humas_rs = DirekturRS.objects.get(user=request.user.id)
+        daerah = Daerah.objects.get(id=request.POST.get('daerah'))
+        rumahsakit = RumahSakit.objects.create(
+            nama = request.POST.get('nama'),
+            alamat = request.POST.get('alamat'),
+            no_telp = request.POST.get('no_telp'),
+            deskripsi = request.POST.get('deskripsi'),
+            daerah = daerah,
+            image = request.FILES['image'],
+        )
+        rumahsakit.poliklinik.set(request.POST.get('poliklinik'))
+        rumahsakit.fasilitas.set(request.POST.get('poliklinik'))
+        rumahsakit.save()
+        humas_rs.rumahsakit.set(RumahSakit.objects.filter(id=rumahsakit.id))
+        humas_rs.save()
+        reg_rs.delete()
+        return redirect('/')
+
+
+
+class rumahsakit_changed(View):
+    def get(self, request, pk):
+        pass
+
+    def post(self, request, pk):
+        daerah = Daerah.objects.get(id=request.POST.get('daerah'))
+        rumahsakit = RumahSakit.objects.get(id=pk)
+        rumahsakit.nama = request.POST.get('nama')
+        rumahsakit.alamat = request.POST.get('alamat')
+        rumahsakit.no_telp = request.POST.get('no_telp')
+        rumahsakit.deskripsi = request.POST.get('deskripsi')
+        rumahsakit.daerah = daerah
+        if request.FILES: rumahsakit.image = request.FILES['image']
+        rumahsakit.poliklinik.set(request.POST.get('poliklinik'))
+        rumahsakit.fasilitas.set(request.POST.get('poliklinik'))
+        rumahsakit.save()
+        return redirect('/')
+
 
 class rumahsakit_dokter(View):
     def filter_dokter(self, request, rs_requst):

@@ -1,0 +1,28 @@
+{% extends "rumahsakit/register_rumahsakit.html" %}
+{% block form %}
+    <h2 class="form-title">Data rumah Sakit</h2>
+    <div class="form-textbox">
+        <label for="nama">Nama</label>
+        {{form.nama}}<br>
+    </div>
+    {{form.nama.errors.as_text}}
+
+    <div class="form-textbox">
+        <label for="alamat">Alamat</label>
+        {{form.alamat}}
+    </div>
+
+    <div class="form-textbox">
+        <label for="telp">No Telepon</label>
+        {{form.no_telp}}
+    </div>
+
+    <div class="form-textbox">
+        <label for="file_akreditansi">File Akreditasi</label>
+        {{form.file_akreditansi}}
+    </div>
+
+    <div class="form-textbox">
+        <input type="submit" name="next" id="next" class="submit" value="Next" />
+    </div>
+{% endblock form %}

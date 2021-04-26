@@ -140,6 +140,7 @@
                 <li class="header">MENU</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="{% if request.path|split:'/ 1' == rumahsakit_url|split:'/ 1' %} active {% endif %}"><a href="{% url 'rumahsakit' %}"><i class="fa fa-link"></i> <span>Rumah Sakit</span></a></li>
+                <li class=""><a href="{% url 'register_rs_1' %}"><i class="fa fa-link"></i> <span>Register</span></a></li>
                 <li class="{% if request.path|split:'/ 1' == dokter_url|split:'/ 1' %} active {% endif %}"><a href="{% url 'dokter' %}"><i class="fa fa-link"></i> <span>Dokter</span></a></li>
                 <li class="{% if request.path|split:'/ 1' == about_url|split:'/ 1' %} active {% endif %}"><a href="{% url 'about' %}"><i class="fa fa-link"></i> <span>About</span></a></li>
             </ul>

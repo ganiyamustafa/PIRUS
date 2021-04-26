@@ -1,0 +1,131 @@
+{% extends 'template_index.html' %}
+{% load custom_tags %}
+{% load compress %}
+
+{% block title %}
+    Rumah Sakit
+{% endblock title %}
+
+{% block _css %}
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss" href="/static/sass/form.sass" />
+    {% endcompress %}
+{% endblock _css %}
+
+{% block body %}
+
+        <div class="content-wrapper" style="margin-bottom: 20px">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="content-body relative-ib" id="content-body">
+                    <img id="img-preview" src="{% if image %} /media/{{image}} {% endif %}" class="img-circle mb-10">
+                    <form method="post" enctype="multipart/form-data" action="{% url action_form id %}">
+                    {% csrf_token %}
+                        <ul class="list-style-none mr-25 pt-10 pb-10 pl-10">
+                            <li>
+                                <div class="file-upload-wrapper" data-text="Select your image!">
+                                    {{form.image}}
+                                </div>
+                            </li>
+                            <li><div class="form__group field">
+                                    {{form.nama}}
+                                    <label for="nama" class="form__label">Nama</label>
+                                </div>
+                            </li>
+                            <li><div class="form__group field">
+                                    {{form.alamat}}
+                                    <label for="alamat" class="form__label">Alamat</label>
+                                </div>
+                            </li>
+                            <li><div class="form__group field">
+                                    {{form.no_telp}}
+                                    <label for="no_telp" class="form__label">No telpon</label>
+                                </div>
+                            </li>
+                            <li><div class="form__group field">
+                                    {{form.deskripsi}}
+                                    <label for="deskripsi" class="form__label">Deskripsi</label>
+                                </div>
+                            </li>
+                            <li><label for="deskripsi" class="mb-10">Poliklinik</label></li>
+                            <li>
+                                {{form.poliklinik}}
+                            </li>
+                            <li><label for="deskripsi" class="mb-10">Fasilitas</label></li>
+                            <li>
+                                {{form.fasilitas}}
+                            </li>
+                            <li><label for="deskripsi" class="mb-10">Daerah</label></li>
+                            <li>
+                                {{form.daerah}}
+                            </li>
+                            <li>
+                                <button class="btn btn-1">
+                                    <svg>
+                                        <rect x="0" y="0" fill="none" width="100%" height="100%"/>
+                                    </svg>
+                                    Submit
+                                </button>
+                            </li>
+                        </ul> 
+                    </form>
+                    {% comment %} {% if reg_rs %}
+                        <div class="pr-20">
+                            <div class="form__group field">
+                                <input type="text" class="input__field mb-10" id="nama" name="nama">
+                                <label for="nama" class="form__label">Nama</label>
+                            </div>
+                        </div>
+                    {% else %}
+                        {% for rs in rumahsakit %}
+                            <img src='/media/{{rs.image}}/'>
+                            <div class="pr-20">
+                                <div class="form__group field">
+                                    <input type="text" class="input__field mb-10" id="nama" name="nama">
+                                    <label for="nama" class="form__label">Nama</label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %} {% endcomment %}
+                </div>
+            </section>
+        </div>
+    {% endblock body %}
+    {% block javascript %}
+        <script src="/static/js/multiselect.min.js"></script>
+        <script>
+            $("form").on("change", ".file-upload-field", function(){
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#img-preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]); 
+                $(this).parent(".file-upload-wrapper").attr("data-text", $(this).val().replace(/.*(\/|\\)/, ''));
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                // make code pretty
+                window.prettyPrint && prettyPrint();
+
+                $('#poliklinik').multiselect({
+                    search: {
+                        left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                        right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                    },
+                    fireSearch: function(value) {
+                        return value.length > 3;
+                    }
+                });
+                $('#fasilitas').multiselect({
+                    search: {
+                        left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                        right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                    },
+                    fireSearch: function(value) {
+                        return value.length > 3;
+                    }
+                });
+            });
+        </script>
+    {% endblock javascript %}

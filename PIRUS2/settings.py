@@ -84,14 +84,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': str(BASE_DIR / 'db.sqlite3'),
-        # 'ENGINE': 'djongo',
-        # 'NAME' : 'pirus',
-        # 'CLIENT' : {
-        #     'host': 'mongodb+srv://ganiyamustafa:Wwwgoogle@pirusdb.2rph4.mongodb.net/PIRUS?retryWrites=true&w=majority',
-        #     'username' : 'ganiyamustafa',
-        #     'password' : 'Wwwgoogle',
-        #     'authMechanism' : 'SCRAM-SHA-1',
-        # }
     }
 }
 
@@ -155,3 +147,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'akun.CustomUser'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'pirus.apl@gmail.com'
+EMAIL_HOST_PASSWORD = 'pirus123'

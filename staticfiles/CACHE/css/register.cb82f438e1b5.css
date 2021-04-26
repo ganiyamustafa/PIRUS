@@ -1,0 +1,134 @@
+/* line 4, static/sass/register.sass */
+* {
+  margin: 0;
+  padding: 0; }
+
+/* line 8, static/sass/register.sass */
+body {
+  background-color: #ecf5fd;
+  font-family: helvetica; }
+
+/* line 12, static/sass/register.sass */
+a {
+  display: block;
+  color: #ad5482;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 40px;
+  text-align: center; }
+
+/* line 20, static/sass/register.sass */
+#bg {
+  position: relative;
+  top: 20px;
+  height: 600px;
+  width: 800px;
+  background: url("https://i.imgur.com/3eP9Z4O.png") center no-repeat;
+  background-size: cover;
+  margin-left: auto;
+  margin-right: auto;
+  border: #fff 15px solid; }
+
+/* line 31, static/sass/register.sass */
+.module {
+  position: relative;
+  top: 15%;
+  height: 100%;
+  width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  background: RGBA(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45);
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45); }
+
+/* line 44, static/sass/register.sass */
+.module ul {
+  list-style-type: none;
+  margin: 0; }
+
+/* line 48, static/sass/register.sass */
+.tab {
+  float: left;
+  height: 60px;
+  width: 33.3%;
+  padding-top: 20px;
+  box-sizing: border-box;
+  background: #eeeeee;
+  text-align: center;
+  cursor: pointer;
+  transition: background .4s; }
+
+/* line 59, static/sass/register.sass */
+.tab:first-child {
+  -webkit-border-radius: 5px 0px 0px 0px;
+  border-radius: 5px 0px 0px 0px; }
+
+/* line 63, static/sass/register.sass */
+.tab:last-child {
+  -webkit-border-radius: 0px 5px 0px 0px;
+  border-radius: 0px 5px 0px 0px; }
+
+/* line 67, static/sass/register.sass */
+.tab:hover {
+  background-color: rgba(0, 0, 0, 0.1); }
+
+/* line 70, static/sass/register.sass */
+.activeTab {
+  background: #fff; }
+
+/* line 73, static/sass/register.sass */
+.activeTab .icon {
+  opacity: 1; }
+
+/* line 76, static/sass/register.sass */
+.icon {
+  height: 24px;
+  width: 24px;
+  opacity: .2; }
+
+/* line 81, static/sass/register.sass */
+.form {
+  float: left;
+  height: 86%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px; }
+
+/* line 88, static/sass/register.sass */
+.textbox {
+  height: 50px;
+  width: 100%;
+  border-radius: 3px;
+  border: rgba(0, 0, 0, 0.3) 2px solid;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 30px; }
+
+/* line 97, static/sass/register.sass */
+.textbox:focus {
+  outline: none;
+  border: #1895d7 2px solid;
+  color: #1895d7; }
+
+/* line 102, static/sass/register.sass */
+.button {
+  height: 50px;
+  width: 100%;
+  border-radius: 3px;
+  border: rgba(0, 0, 0, 0.3) 0px solid;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 30px;
+  background: #2f71b3ff;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 12pt;
+  transition: background .4s;
+  cursor: pointer; }
+
+/* line 117, static/sass/register.sass */
+.button:hover {
+  background: white;
+  color: black;
+  border: 2px solid black; }

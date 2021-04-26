@@ -1,0 +1,50 @@
+{% extends 'template_index.html' %}
+{% load custom_tags %}
+
+{% block title %}
+    Rumah Sakit
+{% endblock title %}
+
+{% block body %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content container-fluid relative-ib">
+            {% for reg_list in register_rs_lists %}
+                <div class="card text-center br-20" style="background: white;">
+                    <div class="card-body pt-15">
+                        {% reg_humas_lists reg_list.id register_humas_lists as reg_humas_list %}
+                        <div class="col-md-6" style="background: white;">
+                            {% comment %} <h4 class="card-text bold">Humas</h4> {% endcomment %}
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item card-title2">HUMAS</li>
+                                <li class="list-group-item" style="font-size: 12px">{{reg_humas_list.nama}}</li>
+                                <li class="list-group-item">{{reg_humas_list.email}}</li>
+                                <li class="list-group-item">{{reg_humas_list.no_telp}}</li>
+                                <li class="list-group-item"><a target="_blank" href="/media/{{reg_humas_list.foto_diri}}">Foto_diri</a></li>
+                                <li class="list-group-item"><a target="_blank" href="/media/{{reg_humas_list.foto_ktp}}">Foto_ktp</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6" style="background: white;">
+                            <ul class="list-group list-group-flush">
+                            <li class="list-group-item card-title2">Rumah Sakit</li>
+                                <li class="list-group-item" style="font-size: 12px">{{reg_list.nama}}</li>
+                                <li class="list-group-item">{{reg_list.alamat}}</li>
+                                <li class="list-group-item">{{reg_list.no_telp}}</li>
+                                <li class="list-group-item"><a target='_blank' href="/media/{{reg_list.file_akreditansi}}">File_akreditasi</a></li>
+                                <table style="width:100%;" class="text-center">
+                                    <tr>
+                                        <th><a href="{% url 'register_rs_accepted' reg_list.id %}"><li class="list-group-item btn-submit-2"> Accept </li></a></th>
+                                        <th><a href="{% url 'register_rs_denied' reg_list.id %}"><li class="list-group-item btn-cancel-2"> Denied </li></a></th>
+                                    </tr>
+                                </table>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+{% endblock body %}
+
+{% block footer %}
+{% endblock %}

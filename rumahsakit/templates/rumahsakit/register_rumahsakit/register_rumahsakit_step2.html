@@ -1,0 +1,32 @@
+{% extends "rumahsakit/register_rumahsakit.html" %}
+{% block action %}{% url 'register_rs_3' %}{% endblock action %}
+{% block form %}
+    <h2 class="form-title">Data Humas</h2>
+    <div class="form-textbox">
+        <label for="name">Nama</label>
+        {{form.nama}}
+    </div>
+
+    <div class="form-textbox">
+        <label for="email">Email</label>
+        {{form.email}}
+    </div>
+
+    <div class="form-textbox">
+        <label for="telp">No Telepon</label>
+        {{form.no_telp}}
+    </div>
+
+    <div class="form-textbox">
+        <label for="file">Foto Diri</label>
+        {{form.foto_diri}}
+    </div>
+    <div class="form-textbox">
+        <label for="file">KTP</label>
+        {{form.foto_ktp}}
+    </div>
+
+    <div class="form-textbox col-md-6">
+        <input type="submit" name="next" id="next" class="submit" value="Next" />
+    </div>
+{% endblock %}

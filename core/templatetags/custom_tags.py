@@ -14,3 +14,9 @@ def direktur_auth(rumahsakits, rumahsakits_confirmed):
     rumahsakit_id_confirmed = [rumahsakit['rumahsakit'] for rumahsakit in rumahsakits_confirmed]
     print(rumahsakit_id, rumahsakit_id_confirmed)
     return any(item in rumahsakit_id_confirmed for item in rumahsakit_id)
+
+@register.simple_tag
+def reg_humas_lists(reg_rs_id, regis_humas_lists):
+    for reg_humas in regis_humas_lists:
+        if reg_humas['register_rumahsakit'] == reg_rs_id: return reg_humas
+        else: continue

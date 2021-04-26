@@ -1,5 +1,5 @@
 from django import forms
-from rumahsakit.models import RumahSakit
+from rumahsakit.models import RumahSakit, RegisterRumahSakit, RegisterHUMASRS
 
 class CreateRumahSakitForm(forms.ModelForm):
 
@@ -16,3 +16,18 @@ class CreateRumahSakitForm(forms.ModelForm):
             'fasilitas': forms.SelectMultiple(attrs={'name':"from_fasilitas", 'id':"fasilitas", 'class':"multiple-form mb-10", 'size': '8'}),
             'daerah': forms.Select(attrs={'class': 'select-form mb-10', 'id': 'daerah'}),
         }
+
+class RegisterRumahSakitForm(forms.ModelForm):
+
+    class Meta:
+        model = RegisterRumahSakit
+        fields = 'nama', 'alamat', 'no_telp', 'file_akreditansi'
+        widgets = {
+            'alamat': forms.TextInput(),
+        }
+
+class RegisterHUMASRSForm(forms.ModelForm):
+
+    class Meta:
+        model = RegisterHUMASRS
+        fields = 'nama', 'email', 'no_telp', 'foto_diri', 'foto_ktp'

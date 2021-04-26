@@ -66,7 +66,7 @@
         let ajax_call = function (endpoint, request_parameters) {
             $.getJSON(endpoint, request_parameters)
                 .done(response => {
-                    artists_div.fadeTo('fast', 0).promise().then(() => {
+                        artists_div.fadeTo('fast', 0).promise().then(() => {
                         artists_div.html(response['html_from_view'])
                         artists_div.fadeTo('fast', 1)
                     })
@@ -111,4 +111,3 @@
 
     {% comment %} Live Search {% endcomment %}
 {% endblock javascript %}
-</html>

@@ -134,11 +134,28 @@ $white: #fff;
     background: white;
     color: black;
 
+@mixin button-2($bg-color, $fg-color)
+  background: $bg-color;
+  color: $fg-color;
+
+  &:hover
+    transition: 0.2s;
+    background: white;
+    color: black;
+
 .btn-cancel
   @include button(red, white )
   
 .btn-submit
   @include button($color-primary, white)
+
+.btn-cancel-2
+  @include button-2(red, white)
+
+.btn-submit-2
+  @include button-2($color-primary, white)
+
+
 
   
 @mixin animated-btn-3($height)
@@ -226,6 +243,11 @@ $white: #fff;
 
 .scroll-div-horizontal
   overflow-y: auto;
+
+.card-title2
+  background: $color-primary;
+  color: white;
+  font-size: 16px;
 
 .content-body
   background-color: white;

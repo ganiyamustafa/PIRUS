@@ -1,5 +1,5 @@
 from django.contrib import admin
-from rumahsakit.models import Poliklinik, Fasilitas, Daerah, RumahSakit
+from rumahsakit.models import Poliklinik, Fasilitas, Daerah, RumahSakit, RegisterRumahSakit, RegisterHUMASRS
 
 @admin.register(RumahSakit)
 class RSAdmin(admin.ModelAdmin):
@@ -16,4 +16,6 @@ class RSAdmin(admin.ModelAdmin):
 admin.site.register(Poliklinik)
 admin.site.register(Fasilitas)
 admin.site.register(Daerah)
+admin.site.register(RegisterRumahSakit)
+admin.site.register(RegisterHUMASRS)
 
